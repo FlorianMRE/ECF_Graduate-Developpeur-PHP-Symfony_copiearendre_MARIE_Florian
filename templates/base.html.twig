@@ -7,6 +7,8 @@
         {# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
         {% block stylesheets %}
             {{ encore_entry_link_tags('app') }}
+            {{ encore_entry_link_tags('_navBar') }}
+            {{ encore_entry_link_tags('_footer') }}
         {% endblock %}
 
         {% block javascripts %}
@@ -14,16 +16,17 @@
         {% endblock %}
     </head>
     <body>
+    <div class="body-wrapper">
         <header>
-            <nav>
-
-            </nav>
+            {% include './_components/_NavBar.html.twig' %}
         </header>
         <main class="main-wrapper">
             {% block body %}{% endblock %}
         </main>
         <footer>
-
+            {% include './_components/_footer.html.twig' %}
         </footer>
+    </div>
+
     </body>
 </html>

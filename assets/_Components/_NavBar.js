@@ -1,0 +1,1 @@
+import '../styles/_components/_navBar.css';
