@@ -1,19 +1,21 @@
 <nav>
     <div class="nav-container">
         <div class="left-navbar">
-            <img src="" alt="Logo du garage V.Parrot">
+            <a id="logo-link" href="{{ path('app_home') }}">
+                <img src="" alt="Logo du garage V.Parrot">
+            </a>
             <ul class="list-container">
                 <li>
-                    <a href="#">Prestations</a>
+                    <a href="{{ path('app_services') }}">Prestations</a>
                 </li>
                 <li>
-                    <a href="#">Achats</a>
+                    <a href="{{ path('app_products_buying') }}">Achats</a>
                 </li>
                 <li>
-                    <a href="#">Vente</a>
+                    <a href="{{ path('app_products_selling') }}">Vente</a>
                 </li>
                 <li>
-                    <a href="#">Contact</a>
+                    <a href="{{ path('app_contact') }}">Contact</a>
                 </li>
             </ul>
         </div>
