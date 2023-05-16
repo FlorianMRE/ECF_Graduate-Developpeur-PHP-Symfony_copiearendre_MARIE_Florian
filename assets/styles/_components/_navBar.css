@@ -37,7 +37,7 @@ nav {
 .account-items > ul {
     display: flex;
     justify-content: end;
-    gap: 2em;
+    gap: 1em;
 }
 
 .btn {
