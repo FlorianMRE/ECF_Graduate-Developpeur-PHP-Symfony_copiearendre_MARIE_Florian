@@ -1,0 +1,31 @@
+:root {
+    --navbar-height: 70px;
+    --footer-height: 60px;
+    --color-dark: #171717;
+    --color-light: #f1f1f1;
+}
+
+*, ::before, ::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial;
+}
+
+ul {
+    list-style-type: none;
+}
+
+a {
+    text-decoration: none;
+    color: var(--color-dark)
+}
+
+.body-wrapper {
+    background-color: lightgray;
+    height: auto;
+    min-height: 100vh;
+
+    display: grid;
+    grid-template-rows: var(--navbar-height) 1fr var(--footer-height);
+}
