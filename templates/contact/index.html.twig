@@ -3,18 +3,68 @@
 {% block title %}Hello ContactController!{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+{#    <table>#}
+{#        <thead>#}
+{#        <tr>#}
+{#            <th>jour</th>#}
+{#            <th>matin-ouvert</th>#}
+{#            <th>matin-fermé</th>#}
+{#            <th>pm-ouvert</th>#}
+{#            <th>pm-fermé</th>#}
+{#        </tr>#}
+{#        </thead>#}
+{#    {% for hours in openingHours %}#}
+{#        <tr>#}
+{#            <td>{{ hours.weekday }}</td>#}
+{#            <td>{{ hours.closeday != true#}
+{#                ? hours.amopen | slice(0,2) ~ ':' ~ hours.amopen | slice(2,2)#}
+{#                : '' }}</td>#}
+{#            <td>{{ hours.closeday != true#}
+{#                ? hours.amclose | slice(0,2)  ~ ':' ~ hours.amclose | slice(2,2)#}
+{#                : ''}}</td>#}
+{#            <td>{{ (hours.pmopen is not empty)#}
+{#                ? hours.pmopen | slice(0,2) ~ ':' ~ hours.pmopen | slice(2,2)#}
+{#                : hours.closeday == true ? ''#}
+{#                : 'fermé' }}</td>#}
+{#            <td>{{ (hours.pmclose is not empty)#}
+{#                ? hours.pmclose | slice(0,2) ~ ':' ~ hours.pmclose | slice(2,2)#}
+{#                : hours.closeday == true ? ''#}
+{#                : 'fermé' }}</td>#}
+{#            <td>{{ hours.closeday }}</td>#}
+{#        </tr>#}
+{#    {% endfor %}#}
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ '/Users/florianmarie/Desktop/Studi/Evals/ECF/ECF_Graduate-Developpeur-PHP-Symfony_copiearendre_MARIE_Florian/ECF_Graduate-Developpeur-PHP-Symfony_copiearendre_MARIE_Florian/src/Controller/ContactController.php'|file_link(0) }}">src/Controller/ContactController.php</a></code></li>
-        <li>Your template at <code><a href="{{ '/Users/florianmarie/Desktop/Studi/Evals/ECF/ECF_Graduate-Developpeur-PHP-Symfony_copiearendre_MARIE_Florian/ECF_Graduate-Developpeur-PHP-Symfony_copiearendre_MARIE_Florian/templates/contact/index.html.twig'|file_link(0) }}">templates/contact/index.html.twig</a></code></li>
-    </ul>
-</div>
+{#        {% for hours in openingHours %}#}
+{#            <tr>#}
+{#                <td>{{ hours.day }}</td>#}
+{#                <td>{{ hours.amopen }}</td>#}
+{#                <td>{{ hours.amclose }}</td>#}
+{#                <td>{{ hours.pmopen }}</td>#}
+{#                <td>{{ hours.pmclose }}</td>#}
+{#            </tr>#}
+{#        {% endfor %}#}
+{#    </table>#}
+
+    <div class="hours">
+        <span>Horaires d'ouverture</span>
+        <ul>
+            {% for hours in openingHours %}
+                <li>
+                    <span>{{ hours.day }}</span>
+                    {% if hours.dayclose != true %}
+                        <span>{{ hours.amopen }}</span>
+                        <span>{{ hours.amclose }}</span>
+                        <span>{{ hours.pmopen }}</span>
+                        <span>{{ hours.pmclose }}</span>
+                    {% else %}
+                        <span>Fermé</span>
+                    {% endif %}
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+
+
+
 {% endblock %}
