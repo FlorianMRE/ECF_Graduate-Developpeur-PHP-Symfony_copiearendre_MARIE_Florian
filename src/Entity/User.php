@@ -6,6 +6,7 @@ use App\Repository\UserRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 class User implements UserInterface, PasswordAuthenticatedUserInterface
@@ -16,6 +17,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private ?int $id = null;
 
     #[ORM\Column(length: 180, unique: true)]
+    #[Assert\NotBlank(message: 'Le champ email ne doit pas être vide')]
+    #[Assert\Email(message: 'Cet email n\'est pas un {{ value }} email valide')]
     private ?string $email = null;
 
     #[ORM\Column]
@@ -25,19 +28,30 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * @var string The hashed password
      */
     #[ORM\Column]
+    #[Assert\Length(
+        min: 6,
+        max: 255,
+        minMessage: 'Votre mot de passe doit contenir 6 charactère au minimum',
+        maxMessage: 'Votre mot de passe ne doit pas contenir plus de 255 charactère'
+    )]
     private ?string $password = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank(message: 'Le champ prénom ne doit pas être vide')]
     private ?string $firstname = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank(message: 'Le champ nom ne doit pas être vide')]
     private ?string $lastname = null;
 
     #[ORM\Column(length: 15)]
+    #[Assert\NotBlank(message: 'Vous devez choisir votre genre')]
     private ?string $gender = null;
 
     #[ORM\Column]
-    private ?int $phone_tel = null;
+    #[Assert\Length(exactly: 10, exactMessage: 'Le numéro de téléphone doit contenir 10 chiffres')]
+    #[Assert\NotBlank(message: 'Le numéro de téléphone ne doit pas être vide')]
+    private ?string $phone_tel = null;
 
     #[ORM\Column]
     private ?\DateTimeImmutable $createdAt = null;
@@ -151,12 +165,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function getPhoneTel(): ?int
+    public function getPhoneTel(): ?string
     {
         return $this->phone_tel;
     }
 
-    public function setPhoneTel(int $phone_tel): self
+    public function setPhoneTel(string $phone_tel): self
     {
         $this->phone_tel = $phone_tel;
 
