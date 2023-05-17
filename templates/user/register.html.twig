@@ -1,0 +1,74 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello RegisterController!{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    {{ encore_entry_link_tags('_form') }}
+{% endblock %}
+
+{% block body %}
+
+    <h1>Inscription</h1>
+
+    {% if error %}
+        <div class="alert">
+                    <span class="error">
+                        {{ error }}
+                    </span>
+        </div>
+    {% endif %}
+
+    {{ form_errors(formView) }}
+
+    <div class="register-container">
+        <div class="form-container">
+            {{ form_start(formView) }}
+            <div class="form-items-container">
+                <div class="form-items">
+                    {{ form_row(formView.gender) }}
+                </div>
+                <div class="form-items">
+                    {{ form_row(formView.firstname) }}
+                </div>
+                <div class="form-items">
+                    {{ form_row(formView.lastname) }}
+                </div>
+                <div class="form-items">
+                    {{ form_row(formView.phone_tel) }}
+                </div>
+                <div class="form-items">
+                    {{ form_row(formView.email) }}
+                </div>
+                <div class="form-items">
+                    {{ form_row(formView.password.first) }}
+                </div>
+                <div class="form-items">
+                    {{ form_row(formView.password.second) }}
+                </div>
+
+            </div>
+
+            <div class="submit">
+                <button type="submit">Envoyer</button>
+            </div>
+
+            {{ form_end(formView) }}
+        </div>
+        <div class="other-options">
+            <div class="login-register-options">
+                <h3>Déja parmi nous ?</h3>
+                <a href="{{ path('app_login') }}">Me connecter</a>
+            </div>
+            <div class="follow-login">
+                <span>Suivez-nous sur nos différents réseaux</span>
+                <div class="follow-login-icons">
+                    <span>Instagram</span>
+                    <span>Twitter</span>
+                    <span>Snapchat</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

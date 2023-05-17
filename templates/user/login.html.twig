@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    {{ encore_entry_link_tags('_form') }}
+{% endblock %}
+
+{% block body %}
+    <h1>Connexion</h1>
+
+    {% if error %}
+        <div class="alert">Mauvaise informations rentrées</div>
+    {% endif %}
+
+    <div class="login-container">
+        <div class="form-container">
+            {{ form_start(formView) }}
+
+            <div class="form-items-container">
+                <div class="form-items">
+                    {{ form_row(formView.email) }}
+                </div>
+                <div class="form-items">
+                    {{ form_row(formView.password) }}
+                </div>
+
+            </div>
+
+            <div class="submit">
+                <button type="submit">Envoyer</button>
+            </div>
+
+            {{ form_end(formView) }}
+        </div>
+        <div class="other-options">
+            <div class="login-register-options">
+                <h3>Pas encore de compte ?</h3>
+                <a href="{{ path('app_register') }}">Créer un compte</a>
+            </div>
+            <div class="follow-login">
+                <span>Suivez-nous sur nos différents réseaux</span>
+                <span>Instagram</span>
+                <span>Twitter</span>
+                <span>Snapchat</span>
+            </div>
+        </div>
+    </div>
+{% endblock %}

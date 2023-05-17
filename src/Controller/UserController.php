@@ -2,26 +2,86 @@
 
 namespace App\Controller;
 
+use App\Entity\User;
+use App\Form\LoginType;
+use App\Form\RegisterType;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Bundle\SecurityBundle\Security;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
 class UserController extends AbstractController
 {
-    #[Route('/
-    login', name: 'app_login')]
-    public function login(): Response
+    #[Route('/login', name: 'app_login')]
+    public function login(
+        AuthenticationUtils $authenticationUtils
+    ): Response
     {
-        return $this->render('user/index.html.twig', [
-            'controller_name' => 'UserController',
+        $form = $this->createForm(LoginType::class);
+
+        $error = $authenticationUtils->getLastAuthenticationError();
+
+//        if ($error->getMessage() === "Bad credentials.") {
+//            $error = 'non';
+//        }
+
+        dump($error);
+
+//        $lastusername = $authenticationUtils->getLastUsername();
+
+        if ($form->isSubmitted()) {
+            return $this->redirectToRoute('app_home');
+        }
+
+        dump($error);
+        return $this->render('user/login.html.twig', [
+            'formView' => $form->createView(),
+            'error' => $error
         ]);
     }
 
     #[Route('/register', name: 'app_register')]
-    public function register(): Response
+    public function register(
+        Request $request,
+        EntityManagerInterface $em,
+        UserPasswordHasherInterface $passwordHasher,
+        Security $security
+    ): Response
     {
-        return $this->render('user/index.html.twig', [
-            'controller_name' => 'UserController',
+        $user = new User();
+
+        $form = $this->createForm(RegisterType::class, $user);
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            $plaintextPassword = $user->getPassword();
+
+            $hashedPassword = $passwordHasher->hashPassword(
+                $user,
+                $plaintextPassword
+            );
+
+            $user->setCreatedAt(new \DateTimeImmutable());
+
+            $user->setPassword($hashedPassword);
+
+            $em->persist($user);
+            $em->flush();
+
+            $security->login($user);
+
+            return $this->redirectToRoute('app_home');
+        }
+
+        return $this->render('user/register.html.twig', [
+            'formView' => $form->createView(),
+            'error' => null
         ]);
     }
 
