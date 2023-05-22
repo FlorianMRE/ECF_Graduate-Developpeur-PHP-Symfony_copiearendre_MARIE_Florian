@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace DoctrineMigrations;
+namespace old_Migrations;
 
 use Doctrine\DBAL\Schema\Schema;
 use Doctrine\Migrations\AbstractMigration;
@@ -10,7 +10,7 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20230516141602 extends AbstractMigration
+final class Version20230516144726 extends AbstractMigration
 {
     public function getDescription(): string
     {
@@ -20,12 +20,12 @@ final class Version20230516141602 extends AbstractMigration
     public function up(Schema $schema): void
     {
         // this up() migration is auto-generated, please modify it to your needs
-        $this->addSql('ALTER TABLE user ADD firstname VARCHAR(255) NOT NULL, ADD lastname VARCHAR(255) NOT NULL, ADD gender VARCHAR(15) NOT NULL, ADD phone_tel VARCHAR(10) NOT NULL');
+        $this->addSql('CREATE TABLE opening_hours (id INT AUTO_INCREMENT NOT NULL, week_day VARCHAR(15) NOT NULL, am_open VARCHAR(4) DEFAULT NULL, am_close INT DEFAULT NULL, pm_open INT DEFAULT NULL, pm_close INT DEFAULT NULL, close_day TINYINT(1) NOT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
     }
 
     public function down(Schema $schema): void
     {
         // this down() migration is auto-generated, please modify it to your needs
-        $this->addSql('ALTER TABLE user DROP firstname, DROP lastname, DROP gender, DROP phone_tel');
+        $this->addSql('DROP TABLE opening_hours');
     }
 }
