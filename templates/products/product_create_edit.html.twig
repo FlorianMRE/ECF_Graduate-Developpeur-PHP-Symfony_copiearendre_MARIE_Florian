@@ -1,0 +1,74 @@
+{% extends './base.html.twig' %}
+
+{% block title %}Création de produits{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    {{ encore_entry_link_tags('_form') }}
+{% endblock %}
+
+{% block body %}
+
+    <div class="main-wrapper">
+
+        {% if app.request.get('_route') == 'app_admin_product_edit' %}
+            <h1>Édition d'un produit </h1>
+            <h2 class="product-edit"><span>Produit à modifier :</span> {{ product.name }}</h2>
+        {% else %}
+            <h1>Vendre mon véhicule</h1>
+        {% endif %}
+
+        <div class="form-container">
+            {{ form_start(formView) }}
+
+            <div class="form-items-container">
+                <div class="form-items">
+                    {{ form_row(formView.type) }}
+                </div>
+                <div class="form-items">
+                    {{ form_row(formView.title) }}
+                </div>
+                <div class="form-items">
+                    {{ form_row(formView.description) }}
+                </div>
+                <div class="form-items">
+                    {{ form_row(formView.kilometrages) }}
+                </div>
+                <div class="form-items">
+                    {{ form_row(formView.years_of_release) }}
+                </div>
+                <div class="form-items">
+                    <div>
+                        {{ form_label(formView.price) }}
+                        <div class="price">
+                            {{ form_widget(formView.price) }}
+                        </div>
+                    </div>
+
+                </div>
+                <div class="form-items">
+                    {{ form_row(formView.images) }}
+                </div>
+            </div>
+
+            <div class="submit">
+                <button type="submit">Valider</button>
+            </div>
+            {{ form_end(formView) }}
+
+        </div>
+
+        {% if app.request.get('_route') == 'app_admin_product_edit' %}
+            <div class="images-show-editor">
+                <span>Images</span>
+                <div class="images-container">
+                    {% for item in product.images %}
+                        <img src="{{ asset('assets/uploads/products/') ~ item.name }}" alt="">
+                    {% endfor %}
+                </div>
+            </div>
+        {% endif %}
+    </div>
+
+
+{% endblock %}

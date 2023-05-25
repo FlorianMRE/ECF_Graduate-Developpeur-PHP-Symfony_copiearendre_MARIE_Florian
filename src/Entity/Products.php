@@ -25,18 +25,30 @@ class Products
     #[ORM\Column(type: Types::TEXT)]
     private ?string $description = null;
 
-    #[ORM\ManyToOne(inversedBy: 'kilometrage')]
-    #[ORM\JoinColumn(nullable: false)]
-    private ?Type $type = null;
-
     #[ORM\Column]
     private ?int $kilometrages = null;
 
-    #[ORM\Column(type: Types::DATE_MUTABLE)]
-    private ?\DateTimeInterface $years_of_release = null;
+    #[ORM\Column]
+    private ?int $years_of_release = null;
 
-    #[ORM\OneToMany(mappedBy: 'products_id', targetEntity: Images::class)]
+    #[ORM\OneToMany(mappedBy: 'products', targetEntity: Images::class, orphanRemoval: true, cascade: ['persist'])]
     private Collection $images;
+
+    #[ORM\Column]
+    private ?\DateTimeImmutable $createdAt = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?\DateTimeImmutable $updatedAt = null;
+
+    #[ORM\Column(length: 255)]
+    private ?string $slug = null;
+
+    #[ORM\ManyToOne(inversedBy: 'products')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Type $type = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?\DateTimeImmutable $publishedAt = null;
 
     public function __construct()
     {
@@ -84,18 +96,6 @@ class Products
         return $this;
     }
 
-    public function getType(): ?Type
-    {
-        return $this->type;
-    }
-
-    public function setType(?Type $type): self
-    {
-        $this->type = $type;
-
-        return $this;
-    }
-
     public function getKilometrages(): ?int
     {
         return $this->kilometrages;
@@ -108,12 +108,12 @@ class Products
         return $this;
     }
 
-    public function getYearsOfRelease(): ?\DateTimeInterface
+    public function getYearsOfRelease(): ?int
     {
         return $this->years_of_release;
     }
 
-    public function setYearsOfRelease(\DateTimeInterface $years_of_release): self
+    public function setYearsOfRelease(int $years_of_release): self
     {
         $this->years_of_release = $years_of_release;
 
@@ -146,6 +146,66 @@ class Products
                 $image->setProductsId(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getCreatedAt(): ?\DateTimeImmutable
+    {
+        return $this->createdAt;
+    }
+
+    public function setCreatedAt(\DateTimeImmutable $createdAt): self
+    {
+        $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    public function getUpdatedAt(): ?\DateTimeImmutable
+    {
+        return $this->updatedAt;
+    }
+
+    public function setUpdatedAt(?\DateTimeImmutable $updatedAt): self
+    {
+        $this->updatedAt = $updatedAt;
+
+        return $this;
+    }
+
+    public function getSlug(): ?string
+    {
+        return $this->slug;
+    }
+
+    public function setSlug(string $slug): self
+    {
+        $this->slug = $slug;
+
+        return $this;
+    }
+
+    public function getType(): ?Type
+    {
+        return $this->type;
+    }
+
+    public function setType(?Type $type): self
+    {
+        $this->type = $type;
+
+        return $this;
+    }
+
+    public function getPublishedAt(): ?\DateTimeImmutable
+    {
+        return $this->publishedAt;
+    }
+
+    public function setPublishedAt(?\DateTimeImmutable $publishedAt): self
+    {
+        $this->publishedAt = $publishedAt;
 
         return $this;
     }

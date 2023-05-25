@@ -51,25 +51,26 @@ class Type
         return $this->products;
     }
 
-    public function addProducts(Products $products): self
+    public function addProduct(Products $product): self
     {
-        if (!$this->products->contains($products)) {
-            $this->products->add($products);
-            $products->setType($this);
+        if (!$this->products->contains($product)) {
+            $this->products->add($product);
+            $product->setType($this);
         }
 
         return $this;
     }
 
-    public function removeProducts(Products $products): self
+    public function removeProduct(Products $product): self
     {
-        if ($this->products->removeElement($products)) {
+        if ($this->products->removeElement($product)) {
             // set the owning side to null (unless already changed)
-            if ($products->getType() === $this) {
-                $products->setType(null);
+            if ($product->getType() === $this) {
+                $product->setType(null);
             }
         }
 
         return $this;
     }
+
 }

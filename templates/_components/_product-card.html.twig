@@ -1,0 +1,15 @@
+<a class="card" href="#">
+    <div class="card-container">
+        <img src="{{ asset('assets/uploads/products/') ~ product.images[0].name }}" alt="">
+{#        {% if product.publishedAt is not empty %}#}
+{#            <span class="published">{{ product.publishedAt }}</span>#}
+{#        {% endif %}#}
+        <div class="product-description">
+            <span>{{ product.title }}</span>
+            <span class="mini-text kilometre">Kilomètrage: <b> {{ product.kilometrages |number_format(0, null, '.')}}km</b></span>
+            <span class="mini-text yearsOfRelease">Année: <b> {{ product.yearsOfRelease }}</b></span>
+            <span class="mini-text price">Prix: <b> {{ (product.price / 100) |number_format(0, '', '.') }} &euro;</b></span>
+            <span><u>Voir plus</u></span>
+        </div>
+    </div>
+</a>

@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello ProductsController!{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    {{ encore_entry_link_tags('_productCard') }}
+{% endblock %}
+
+{% block body %}
+    <h1>Nos différents produits</h1>
+
+    <ul class="product-grid">
+        {% for product in products %}
+            <li>
+                {% include "_components/_product-card.html.twig" %}
+            </li>
+        {% endfor %}
+    </ul>
+
+{% endblock %}
