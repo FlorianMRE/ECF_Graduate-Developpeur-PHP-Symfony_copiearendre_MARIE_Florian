@@ -2,7 +2,14 @@
 
 {% block title %}Hello ContactController!{% endblock %}
 
+{% block stylesheets %}
+    {{ parent() }}
+    {{ encore_entry_link_tags('contactCss') }}
+{% endblock %}
+
 {% block body %}
+    
+    <h1>Aide et contact</h1>
 
 {#    <table>#}
 {#        <thead>#}
@@ -46,25 +53,34 @@
 {#        {% endfor %}#}
 {#    </table>#}
 
-    <div class="hours">
-        <span>Horaires d'ouverture</span>
+    <div class="hours-contact">
+        <h4>Horaires d'ouverture</h4>
         <ul>
             {% for hours in openingHours %}
                 <li>
-                    <span>{{ hours.day }}</span>
+                    <div>{{ hours.day }}</div>
+                    <div class="hours">
                     {% if hours.dayclose != true %}
                         <span>{{ hours.amopen }}</span>
                         <span>{{ hours.amclose }}</span>
                         <span>{{ hours.pmopen }}</span>
                         <span>{{ hours.pmclose }}</span>
                     {% else %}
-                        <span>Fermé</span>
+                        <span class="closed-hour">Fermé</span>
                     {% endif %}
+                    </div>
                 </li>
             {% endfor %}
         </ul>
     </div>
 
-
+    <div class="client-informations">
+        <div>{{ clientsInformations.entrepriseName }}</div>
+        <div>{{ clientsInformations.description }}</div>
+        <div>{{ clientsInformations.history }}</div>
+        <span>Addresse: {{ clientsInformations.addressNumber }} {{ clientsInformations.addressStreet }} - {{ clientsInformations.addressCity }} {{ clientsInformations.addressZipcode }}</span>
+        <div>N° de téléphone: <a href="tel:{{ clientsInformations.tel }}">{{ clientsInformations.tel }}</a> </div>
+        <div>N° Siret: {{ clientsInformations.siretNumber }}</div>
+    </div>
 
 {% endblock %}

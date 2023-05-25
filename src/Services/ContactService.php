@@ -10,11 +10,25 @@ class ContactService
         $openingHours
     ): array
     {
+        $frenchDays = [
+            'monday' => 'Lundi',
+            'tuesday' => 'Mardi',
+            'wednesday' => 'Mercredi',
+            'thursday' => 'Jeudi',
+            'friday' => 'Vendredi',
+            'saturday' => 'Samedi',
+            'sunday' => 'Dimanche'
+        ];
+
         $openingHoursArray = [];
 
         foreach ($openingHours as $key => $hours) {
             if (!is_null($hours->getWeekDay()) && !empty($hours->getWeekDay())) {
-                $openingHoursArray[$key]['day'] = $hours->getWeekDay();
+                if (array_key_exists($hours->getWeekDay(), $frenchDays)) {
+                    $openingHoursArray[$key]['day'] = $frenchDays[$hours->getWeekDay()];
+                } else {
+                    $openingHoursArray[$key]['day'] = $hours->getWeekDay();
+                }
             } else {
                 $openingHoursArray[$key]['day'] = '';
             }

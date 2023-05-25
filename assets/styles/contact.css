@@ -1,0 +1,26 @@
+.hours-contact {
+    margin: 2em 0;
+    width: 40%;
+}
+
+.hours-contact > h4 {
+    margin-bottom: 2em;
+    text-align: center;
+}
+
+.hours-contact > ul > li {
+    display: grid;
+    grid-template-columns: 25% 1fr;
+    text-align: center;
+    margin: .5em 0;
+}
+
+.hours {
+    display: grid;
+    grid-template-columns: repeat(4, 25%);
+}
+
+.closed-hour {
+    grid-column: 1 / span 4;
+    text-align: center;
+}

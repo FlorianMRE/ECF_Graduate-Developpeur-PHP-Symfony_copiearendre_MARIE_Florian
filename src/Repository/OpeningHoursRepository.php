@@ -40,7 +40,7 @@ class OpeningHoursRepository extends ServiceEntityRepository
     }
 
 //    /**
-//     * @return OpeningHours[] Returns an array of OpeningHours objects
+//     * @return OpeningHoursFixtures[] Returns an array of OpeningHoursFixtures objects
 //     */
 //    public function findByExampleField($value): array
 //    {
@@ -54,7 +54,7 @@ class OpeningHoursRepository extends ServiceEntityRepository
 //        ;
 //    }
 
-//    public function findOneBySomeField($value): ?OpeningHours
+//    public function findOneBySomeField($value): ?OpeningHoursFixtures
 //    {
 //        return $this->createQueryBuilder('o')
 //            ->andWhere('o.exampleField = :val')

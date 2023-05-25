@@ -5,7 +5,7 @@ namespace App\DataFixtures;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 
-class OpeningHours extends Fixture
+class OpeningHoursFixtures extends Fixture
 {
     const weekFiveDays = [
         'monday',

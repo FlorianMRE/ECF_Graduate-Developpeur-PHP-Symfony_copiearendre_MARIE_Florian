@@ -24,6 +24,8 @@ Encore
     .addEntry('_navBar', './assets/_Components/_NavBar.js')
     .addEntry('_footer', './assets/_Components/_footer.js')
     .addEntry('_form', './assets/styles/_components/_form.css')
+    .addEntry('_productCard', './assets/styles/_components/_productCard.css')
+    .addEntry('contactCss', './assets/styles/contact.css')
     .enableSingleRuntimeChunk()
 
     // enables the Symfony UX Stimulus bridge (used in assets/bootstrap.js)
