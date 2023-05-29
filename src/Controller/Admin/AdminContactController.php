@@ -2,29 +2,63 @@
 
 namespace App\Controller\Admin;
 
+use App\Entity\ClientInformations;
 use App\Entity\OpeningHours;
 use App\Form\HoursType;
-use App\Services\ContactService;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 class AdminContactController extends AbstractController
 {
-    #[Route('/admin/admin/contact', name: 'app_admin_admin_contact')]
-    public function setHours(EntityManagerInterface $em, ContactService $contactService): Response
+    #[Route('/admin/contact/edit/{week_day}', name: 'app_admin_admin_contact')]
+    public function setHours(
+        OpeningHours $openingHour,
+        Request $request,
+        EntityManagerInterface $em,): Response
     {
 
-        $hours = $em->getRepository(OpeningHours::class)->findAll();
+        $openingHours = $em->getRepository(OpeningHours::class)->findAll();
 
-        $form = $this->createForm(HoursType::class);
+        $clientInformations = $em->getRepository(ClientInformations::class)->findAll()[0];
 
-        $openingHoursArray = $contactService->openingHours($hours);
+        $form = $this->createForm(HoursType::class, $openingHour);
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            if (!is_null($openingHour->getAmOpen()) && !empty($openingHour->getAmOpen())) {
+                $openingHour->setAmOpen($openingHour->getAmOpen());
+            }
+            if (!is_null($openingHour->getAmClose()) && !empty($openingHour->getAmClose())) {
+                $openingHour->setAmClose($openingHour->getAmClose());
+            }
+            if (!is_null($openingHour->getPmOpen()) && !empty($openingHour->getPmOpen())) {
+                $openingHour->setPmOpen($openingHour->getPmOpen());
+            }
+            if (!is_null($openingHour->getPmClose()) && !empty($openingHour->getPmClose())) {
+                $openingHour->setPmClose($openingHour->getPmClose());
+            }
+            if ($openingHour->isCloseDay() !== true || $openingHour->isCloseDay() !== false) {
+                $openingHour->setPmClose($openingHour->getPmClose());
+            }
+
+            $em->persist($openingHour);
+            $em->flush();
+
+            return $this->redirectToRoute('app_contact', [
+                'openingHours' => $openingHours,
+                'clientsInformations' => $clientInformations,
+            ]);
+        }
 
         return $this->render('admin/contact/adminContact.html.twig', [
             'formView' => $form->createView(),
-            'hours' => $openingHoursArray
+            'hour' => $openingHour
         ]);
     }
+
+
 }

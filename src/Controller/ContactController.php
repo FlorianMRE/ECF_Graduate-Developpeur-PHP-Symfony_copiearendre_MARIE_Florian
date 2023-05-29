@@ -22,13 +22,13 @@ class ContactController extends AbstractController
     {
         $openingHours = $em->getRepository(OpeningHours::class)->findAll();
 
-        $clientInformations = $em->getRepository(ClientInformations::class)->findOneBy(['id' => 1]);
+        $clientInformations = $em->getRepository(ClientInformations::class)->findAll()[0];
 
-        $openingHoursArray = $contactService->openingHours($openingHours);
+//        $openingHoursArray = $contactService->openingHours($openingHours);
 
         return $this->render('contact/contact.html.twig', [
             'controller_name' => 'ContactController',
-            'openingHours' => $openingHoursArray,
+            'openingHours' => $openingHours,
             'clientsInformations' => $clientInformations
         ]);
     }

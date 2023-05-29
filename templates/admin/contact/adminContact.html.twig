@@ -2,31 +2,51 @@
 
 {% block title %}Hello AdminContactController!{% endblock %}
 
+{% block stylesheets %}
+    {{ parent() }}
+    {{ encore_entry_link_tags('contactCss') }}
+{% endblock %}
+
 {% block javascripts %}
     {{ encore_entry_script_tags('contactJs') }}
 {% endblock %}
 
 {% block body %}
+    
+    <h1>Modifications des horaires d'ouvertures</h1>
+    
 
-    <form action="">
+    {{ form_start(formView, {'attr': {'id': 'hours'}}) }}
 
-        {% for hour in hours %}
-            <span>{{ hour.day }}</span>
-            <input class="hoursInput" type="time" name="{{ hour.day }}_am_open" value="{{ hour.amopen }}">
-            <input class="hoursInput" type="time" name="{{ hour.day }}_am_close" value="{{ hour.amclose }}">
-            <input class="hoursInput" type="time" name="{{ hour.day }}_pm_open" value="{{ hour.pmopen }}">
-            <input class="hoursInput" type="time" name="{{ hour.day }}_pm_close" value="{{ hour.pmclose }}">
-            {% if hour.dayclose == true %}
-                <input type="checkbox" name="{{ hour.day }}_close_day" checked>
-            {% else %}
-                <input type="checkbox" name="{{ hour.day }}_close_day">
-            {% endif %}
+    <h2>{{ hour.weekDay|capitalize }}</h2>
 
-        {% endfor %}
+    <div class="close">
+        {{ form_row(formView.close_day) }}
+    </div>
 
-        <button type="submit" class="btn">Envoyer</button>
+    <div class="hours-wrapper">
+        <div class="hours-item-container">
+            <h4>Matin</h4>
+            <div class="hours-item am">
+                {{ form_widget(formView.am_open) }}
+                {{ form_widget(formView.am_close) }}
+            </div>
+        </div>
+        <div class="hours-item-container">
+            <h4>Après-midi</h4>
+            <div class="hours-item pm">
+                {{ form_widget(formView.pm_open) }}
+                {{ form_widget(formView.pm_close) }}
+            </div>
+        </div>
 
-    </form>
+    </div>
+
+    <div class="submit">
+        <button type="submit" class="btn">Valider</button>
+    </div>
+
+    {{ form_end(formView) }}
 
     
 

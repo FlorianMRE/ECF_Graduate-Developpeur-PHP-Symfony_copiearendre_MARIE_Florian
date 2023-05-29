@@ -1,3 +1,12 @@
+h2 {
+    margin: 1em 0;
+    text-align: center;
+}
+
+form#hours {
+    font-size: var(--text-large);
+}
+
 .hours-contact {
     margin: 2em 0;
     width: 40%;
@@ -6,6 +15,7 @@
 .hours-contact > h4 {
     margin-bottom: 2em;
     text-align: center;
+    font-size: var(--text-large);
 }
 
 .hours-contact > ul > li {
@@ -23,4 +33,88 @@
 .closed-hour {
     grid-column: 1 / span 4;
     text-align: center;
+}
+
+.form-wrapper {
+    display: grid;
+    grid-auto-rows: 2em;
+}
+
+.input-wrapper {
+    display: grid;
+    grid-template-columns: 10% 1fr 1fr 1fr 1fr 1fr;
+}
+
+.input-wrapper > div > input {
+    text-align: center;
+}
+
+.input-wrapper > div {
+    justify-self: center;
+    align-self: center;
+}
+
+.none {
+    display: none;
+}
+
+.hours-wrapper {
+    display: grid;
+    grid-template-columns: 50% 50%;
+    grid-auto-columns: 50%;
+    justify-content: center;
+    align-items: center;
+}
+
+.hours-item {
+    width: 100%;
+    margin-inline: auto;
+}
+
+.hours-item > * {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 30px 0;
+}
+
+.hours-item-container > h4{
+    text-align: center;
+}
+
+.hours-wrapper > *:nth-child(1) {
+    border-right: 1px solid var(--color-dark);
+}
+
+.hours-item > * > select {
+    text-align: center;
+    width: 100px;
+    font-size: 1.5rem;
+}
+
+label {
+    font-size: 1.5rem;
+    margin-right: .5em;
+}
+
+label + input[type=checkbox] {
+    font-size: 50px;
+}
+
+.hours-item > * > * {
+    margin-inline: 1em;
+    padding: .4em .8em;
+}
+
+.close {
+    text-align: center;
+    margin: 2rem 0;
+    font-size: var(--text-large);
+}
+
+.close > div {
+    width: auto;
+    display: grid;
+    grid-template-columns: auto 50px;
+    justify-content: center;
 }

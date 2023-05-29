@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\OpeningHoursRepository;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: OpeningHoursRepository::class)]
@@ -16,17 +17,17 @@ class OpeningHours
     #[ORM\Column(length: 15)]
     private ?string $week_day = null;
 
-    #[ORM\Column(length: 4,nullable: true)]
-    private ?string $am_open = null;
+    #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
+    private ?\DateTimeInterface $am_open = null;
 
-    #[ORM\Column(nullable: true)]
-    private ?int $am_close = null;
+    #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
+    private ?\DateTimeInterface $am_close = null;
 
-    #[ORM\Column(nullable: true)]
-    private ?int $pm_open = null;
+    #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
+    private ?\DateTimeInterface $pm_open = null;
 
-    #[ORM\Column(nullable: true)]
-    private ?int $pm_close = null;
+    #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
+    private ?\DateTimeInterface $pm_close = null;
 
     #[ORM\Column]
     private ?bool $close_day = null;
@@ -48,48 +49,48 @@ class OpeningHours
         return $this;
     }
 
-    public function getAmOpen(): ?string
+    public function getAmOpen(): ?\DateTimeInterface
     {
         return $this->am_open;
     }
 
-    public function setAmOpen(?string $am_open): self
+    public function setAmOpen(?\DateTimeInterface $am_open): self
     {
         $this->am_open = $am_open;
 
         return $this;
     }
 
-    public function getAmClose(): ?int
+    public function getAmClose(): ?\DateTimeInterface
     {
         return $this->am_close;
     }
 
-    public function setAmClose(?int $am_close): self
+    public function setAmClose(?\DateTimeInterface $am_close): self
     {
         $this->am_close = $am_close;
 
         return $this;
     }
 
-    public function getPmOpen(): ?int
+    public function getPmOpen(): ?\DateTimeInterface
     {
         return $this->pm_open;
     }
 
-    public function setPmOpen(?int $pm_open): self
+    public function setPmOpen(?\DateTimeInterface $pm_open): self
     {
         $this->pm_open = $pm_open;
 
         return $this;
     }
 
-    public function getPmClose(): ?int
+    public function getPmClose(): ?\DateTimeInterface
     {
         return $this->pm_close;
     }
 
-    public function setPmClose(?int $pm_close): self
+    public function setPmClose(?\DateTimeInterface $pm_close): self
     {
         $this->pm_close = $pm_close;
 

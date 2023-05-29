@@ -4,15 +4,16 @@ namespace App\DataFixtures;
 
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
+use Symfony\Component\Validator\Constraints\DateTime;
 
 class OpeningHoursFixtures extends Fixture
 {
     const weekFiveDays = [
-        'monday',
-        'tuesday',
-        'wednesday',
-        'thursday',
-        'friday',
+        'lundi',
+        'mardi',
+        'mercredi',
+        'jeudi',
+        'vendredi',
     ];
 
     public function load(ObjectManager $manager): void
@@ -21,19 +22,19 @@ class OpeningHoursFixtures extends Fixture
         foreach (self::weekFiveDays as $day) {
             $openingHours = new \App\Entity\OpeningHours();
             $openingHours->setWeekDay($day);
-            $openingHours->setAmOpen('0845');
-            $openingHours->setAmClose(1200);
-            $openingHours->setPmOpen(1400);
-            $openingHours->setPmClose(1800);
+            $openingHours->setAmOpen(new \DateTimeImmutable(date('H:i', mktime(8,45))));
+            $openingHours->setAmClose(new \DateTimeImmutable(date('H:i', mktime(12,00))));
+            $openingHours->setPmOpen(new \DateTimeImmutable(date('H:i', mktime(14,00))));
+            $openingHours->setPmClose(new \DateTimeImmutable(date('H:i', mktime(18,00))));
             $openingHours->setCloseDay(false);
 
             $manager->persist($openingHours);
         }
 
         $openingHours = new \App\Entity\OpeningHours();
-        $openingHours->setWeekDay('saturday');
-        $openingHours->setAmOpen('0845');
-        $openingHours->setAmClose(1200);
+        $openingHours->setWeekDay('samedi');
+        $openingHours->setAmOpen(new \DateTimeImmutable(date('H:i', mktime(8,45))));
+        $openingHours->setAmClose(new \DateTimeImmutable(date('H:i', mktime(12,00))));
         $openingHours->setPmOpen(null);
         $openingHours->setPmClose(null);
         $openingHours->setCloseDay(false);
@@ -41,7 +42,7 @@ class OpeningHoursFixtures extends Fixture
         $manager->persist($openingHours);
 
         $openingHours = new \App\Entity\OpeningHours();
-        $openingHours->setWeekDay('sunday');
+        $openingHours->setWeekDay('dimanche');
         $openingHours->setAmOpen(null);
         $openingHours->setAmClose(null);
         $openingHours->setPmOpen(null);

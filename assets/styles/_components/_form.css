@@ -141,25 +141,6 @@ h1 {
     margin-inline: 5px;
 }
 
-.submit {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    margin-top: 30px;
-}
-
-form > .submit > button[type=submit] {
-    text-transform: uppercase;
-    padding: .7em 0;
-    width: 50%;
-    font-size: large;
-    font-weight: bold;
-    color: #f1f1f1;
-    border: none;
-    background: #181818;
-    border-radius: 5px;
-}
-
 .form-items-container {
     display: flex;
     flex-direction: column;

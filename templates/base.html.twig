@@ -21,7 +21,9 @@
             {% include './_components/_NavBar.html.twig' %}
         </header>
         <main class="main-wrapper">
-            {% block body %}{% endblock %}
+            <div class="main-container">
+                {% block body %}{% endblock %}
+            </div>
         </main>
         <footer>
             {% include './_components/_footer.html.twig' %}

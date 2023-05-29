@@ -58,13 +58,13 @@
         <ul>
             {% for hours in openingHours %}
                 <li>
-                    <div>{{ hours.day }}</div>
+                    <div>{{ hours.weekDay|capitalize }}</div>
                     <div class="hours">
-                    {% if hours.dayclose != true %}
-                        <span>{{ hours.amopen }}</span>
-                        <span>{{ hours.amclose }}</span>
-                        <span>{{ hours.pmopen }}</span>
-                        <span>{{ hours.pmclose }}</span>
+                    {% if hours.closeDay != true %}
+                        <span>{{ (hours.amOpen) ? hours.amopen|date("H:i") : '' }}</span>
+                        <span>{{ (hours.amClose) ? hours.amClose|date("H:i") : '' }}</span>
+                        <span>{{ (hours.pmOpen) ? hours.pmOpen|date("H:i") : '' }}</span>
+                        <span>{{ (hours.pmClose) ? hours.pmClose|date("H:i") : '' }}</span>
                     {% else %}
                         <span class="closed-hour">Fermé</span>
                     {% endif %}
