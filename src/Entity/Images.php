@@ -22,6 +22,9 @@ class Images
     #[ORM\Column(length: 255)]
     private ?string $name = null;
 
+    #[ORM\Column]
+    private ?bool $FirstView = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -59,6 +62,18 @@ class Images
     public function setName(string $name): self
     {
         $this->name = $name;
+
+        return $this;
+    }
+
+    public function isFirstView(): ?bool
+    {
+        return $this->FirstView;
+    }
+
+    public function setFirstView(bool $FirstView): self
+    {
+        $this->FirstView = $FirstView;
 
         return $this;
     }
