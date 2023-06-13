@@ -5,6 +5,7 @@ namespace App\Repository;
 use App\Entity\Comments;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use function Doctrine\ORM\QueryBuilder;
 
 /**
  * @extends ServiceEntityRepository<Comments>
@@ -37,6 +38,19 @@ class CommentsRepository extends ServiceEntityRepository
         if ($flush) {
             $this->getEntityManager()->flush();
         }
+    }
+
+    public function getCommentByProductAndPushied($productId): array
+    {
+        $q = $this->createQueryBuilder('c');
+            $q->andWhere(
+                $q->expr()->eq('c.product', $productId)
+                );
+            $q->andWhere(
+                $q->expr()->isNotNull('c.published_at')
+            );
+
+        return $q->getQuery()->getResult();
     }
 
 //    /**
