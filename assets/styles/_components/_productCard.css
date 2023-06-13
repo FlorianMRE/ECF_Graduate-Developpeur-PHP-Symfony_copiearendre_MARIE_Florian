@@ -1,4 +1,4 @@
-.product-grid {
+#product-grid {
     margin: 50px 0;
     display: grid;
     grid-gap: 2em;
@@ -16,7 +16,12 @@
 
     border-radius: 10px;
     border: 1px solid #c0c0c0;
-    box-shadow: 0px 0px 5px rgba(42, 42, 42, 0.53);
+    box-shadow: 0 0 5px rgba(42, 42, 42, 0.53);
+}
+
+.card:hover #more-infos {
+    transition: color .2s linear;
+    color: #fc5c50;
 }
 
 .card-container {

@@ -2,14 +2,22 @@
 
 namespace App\Controller;
 
+use App\Entity\Comments;
 use App\Entity\Images;
 use App\Entity\Products;
+use App\Entity\Type;
+use App\Entity\User;
+use App\Form\CommentType;
+use App\Form\FilterType;
 use App\Form\ProductType;
+use App\Services\CommentService;
 use App\Services\ImageService;
 use App\Services\ProductService;
 use Doctrine\ORM\EntityManagerInterface;
+use phpDocumentor\Reflection\Types\Null_;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Exception\BadRequestException;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -24,14 +32,31 @@ class ProductsController extends AbstractController
     }
 
     #[Route('/buy', name: 'app_products_buying')]
-    public function buying(): Response
+    public function buying(
+        Request $request,
+        EntityManagerInterface $em
+    ): Response
     {
+        $options = $request->query->all();
 
-        $products = $this->em->getRepository(Products::class)->findAll();
+        if ($request->isXmlHttpRequest()) {
+
+            $products = $em->getRepository(Products::class)->getProductsLinstingByFilters($options);
+
+
+            return new Response($this->renderView('_components/_product-card.html.twig', [
+                'products' => $products])
+            );
+        }
+
+
+        $products = $em->getRepository(Products::class)->getProductsLinstingByFilters($options);
+
+        $types = $em->getRepository(Type::class)->findAll();
 
         return $this->render('products/productsBuy.html.twig', [
-            'controller_name' => 'ProductsController',
-            'products' => $products
+            'products' => $products,
+            'types' => $types,
         ]);
     }
 
@@ -52,7 +77,6 @@ class ProductsController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
 
-
             $product->setCreatedAt(new \DateTimeImmutable());
 
             $product->setSlug($productService->generateRandomString(25));
@@ -65,10 +89,23 @@ class ProductsController extends AbstractController
                     $fichier = $imageService->add($image, $folder, 300, 300);
 
                     $img = new Images();
-                    $img->setOriginalName($form->get('images')->getData()[0]->getClientOriginalName());
+                    $img->setOriginalName($image->getClientOriginalName());
                     $img->setName($fichier);
                     $product->addImage($img);
+
+//dd($image->getClientOriginalName());
+//                    dd($form->get('images')->getData()[0]->getClientOriginalName());
+//                    dd('la', $images[0]->getClientOriginalName());
+//                    dd($images[0]->getClientOriginalName() === $img->getOriginalName());
+//                    dd($images);
+
+                    if ($images[0]->getClientOriginalName() === $img->getOriginalName()){
+                        $img->setFirstView(true);
+                    } else {
+                        $img->setFirstView(false);
+                    }
                 }
+
             } else {
                 throw new BadRequestException('Pas d\'image sélectionnées');
             }
@@ -86,18 +123,40 @@ class ProductsController extends AbstractController
         ]);
     }
 
-    /**
-     * @param Request $request
-     * @param ImageService $imageService
-     * @param SluggerInterface $slugger
-     * @return Response
-     */
-    #[Route('/admin/product/create', name: 'app_admin_product_create')]
-    public function productCreate(
+    #[Route('/buy/product/{slug}', name: 'app_product_buy_show')]
+    public function productShow(
+        Products $product,
         Request $request,
-        ProductService $productService
+        CommentService $commentService
     ): Response
     {
 
+        /** @var $user User */
+        $user = $this->getUser();
+
+        $comment = new Comments();
+
+        $commentForm = $this->createForm(CommentType::class, $comment);
+
+        $commentForm->handleRequest($request);
+
+        if ($user) {
+            if ($commentForm->isSubmitted() && $commentForm->isSubmitted()) {
+                $commentService->commentFormSubmit($comment, $user, $product);
+                return $this->redirect($request->getUri());
+            }
+        }
+
+//        $allComments = $this->em->getRepository(Comments::class)->findBy(['product' => $product, 'published_at' => null]);
+
+        $allComments = $this->em->getRepository(Comments::class)->getCommentByProductAndPushied($product->getId());
+
+//        dd($allComments);
+
+        return $this->render('products/productShow.html.twig', [
+            'commentForm' => $commentForm,
+            'allComments' => $allComments,
+            'product' => $product
+        ]);
     }
 }

@@ -5,6 +5,7 @@ namespace App\Repository;
 use App\Entity\Images;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use function Doctrine\ORM\QueryBuilder;
 
 /**
  * @extends ServiceEntityRepository<Images>
@@ -37,6 +38,20 @@ class ImagesRepository extends ServiceEntityRepository
         if ($flush) {
             $this->getEntityManager()->flush();
         }
+    }
+
+    public function getPrincipalImg(): Images
+    {
+        $q = $this->createQueryBuilder('i')
+            ->leftJoin('i.products', 'p');
+            $q->andWhere(
+                $q->expr()->andX(
+                    $q->expr()->eq('p.id','i.products'),
+                    $q->expr()->eq('i.FirstView', 1)
+                )
+            );
+
+        return $q->getQuery()->getResult();
     }
 
 //    /**

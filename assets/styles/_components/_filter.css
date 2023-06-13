@@ -1,0 +1,22 @@
+.filters {
+    background: lightblue;
+    display: flex;
+    text-align: center;
+    flex-direction: column;
+}
+
+.filters input {
+    padding: .2em;
+}
+
+.filters > #form-checkbox > div {
+    display: inline;
+    margin-inline: .7em;
+}
+
+#form-filter {
+    max-width: 600px;
+    width: 100%;
+    background: lightpink;
+    margin-inline: auto;
+}

@@ -5,17 +5,61 @@
 {% block stylesheets %}
     {{ parent() }}
     {{ encore_entry_link_tags('_productCard') }}
+    {{ encore_entry_link_tags('_filter') }}
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    {{ encore_entry_script_tags('productJs') }}
 {% endblock %}
 
 {% block body %}
     <h1>Nos différents produits</h1>
+    
+    <div class="filters">
+        <form id="form-checkbox">
+            {% for type in types %}
+                <div class="types-filter">
+                    <label for="type_{{ type.type }}">{{ type.type|capitalize }}</label>
+                    <input type="checkbox" name="type[]" id="type_{{ type.type }}" value="{{ type.id }}">
+                </div>
+            {% endfor %}
+        </form>
 
-    <ul class="product-grid">
-        {% for product in products %}
-            <li>
-                {% include "_components/_product-card.html.twig" %}
-            </li>
-        {% endfor %}
+
+        <form id="form-filter">
+            <div class="price-filter">
+                <label for="min_price">Prix minimum</label>
+                <input type="number" name="price-min" id="min_price">
+
+                <label for="max_price">Prix maximum</label>
+                <input type="number" name="price-max" id="max_price">
+            </div>
+            <div class="kilometrages-filter">
+                <label for="kilometrages-min">Km min</label>
+                <input type="number" name="km-min" id="kilometrages-min">
+
+                <label for="kilometrages-max">Km max</label>
+                <input type="number" name="km-max" id="kilometrages-max">
+            </div>
+            <div class="releaseYear-filter">
+                <label for="releaseYear-min">Année min</label>
+                <input type="number" name="releaseYear-min" id="releaseYear-min">
+
+                <label for="releaseYear-max">Année max</label>
+                <input type="number" name="releaseYear-max" id="releaseYear-max">
+            </div>
+        </form>
+
+    </div>
+
+    <div class="order">
+        <a id="orderName" class="order-link" href="{{ path('app_products_buying') }}">Nom</a>
+        <a id="orderPrice" class="order-link" href="{{ path('app_products_buying') }}">Prix</a>
+    </div>
+
+    <ul id="product-grid">
+        {% include "_components/_product-card.html.twig" %}
     </ul>
 
 {% endblock %}

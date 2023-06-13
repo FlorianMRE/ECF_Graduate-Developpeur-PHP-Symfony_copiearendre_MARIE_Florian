@@ -1,0 +1,68 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello ProductsController!{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    {{ encore_entry_link_tags('productCss') }}
+{% endblock %}
+
+{% block javascripts %}
+    {{ encore_entry_script_tags('productJs') }}
+{% endblock %}
+
+{% block body %}
+    <section class="product-show-wrapper">
+        <div id="img-container">
+            <div id="img">
+                <img class="product-img-show" src="{{ asset('assets/uploads/products/') ~ product.images[0].name }}" alt="">
+            </div>
+            <div id="img-carousel">
+                {% for img in product.images %}
+                    <img class="product-img-show-carousel" src="{{ asset('assets/uploads/products/') ~ img.name }}" alt="">
+                {% endfor %}
+            </div>
+        </div>
+        <div id="product-description">
+        <h3>{{ product.title }}</h3>
+            <div class="product-description-wrapper">
+                <div id="infos">
+                    <span>Catégorie : <b>{{ product.type.type |capitalize}}</b></span>
+                    <span class="kilometre">Kilomètrage: <b> {{ product.kilometrages |number_format(0, null, '.')}}km</b></span>
+                    <span class="yearsOfRelease">Année: <b> {{ product.yearsOfRelease }}</b></span>
+                    <span class="price">Prix: <b> {{ (product.price / 100) |number_format(0, '', '.') }} &euro;</b></span>
+                </div>
+                <div id="description">
+                    <p>{{ product.description |capitalize}}</p>
+                </div>
+
+            </div>
+        </div>
+    </section>
+    <section id="allCommentsContainer">
+        {% for comment in allComments %}
+            <div class="comment-card {{ comment.user == app.user ? 'personnal-comment' : ''}}">
+                <span id="user-infos"><b>{{ comment.user.lastname |upper }} {{ comment.user.firstname }}</b></span>
+                <p>{{ comment.content |capitalize}}</p>
+                <span id="publishe-at" class="mini-text">Publié le: {{ comment.publishedAt }}</span>
+            </div>
+        {% endfor %}
+    </section>
+
+    <section id="form-container">
+        {{ form_start(commentForm) }}
+
+        <div id="comment">
+            {{ form_label(commentForm.content) }}
+            {{ form_widget(commentForm.content) }}
+            <div id="comment-submit-btn">
+                <button type="submit">Envoyer</button>
+            </div>
+        </div>
+
+        {{ form_end(commentForm) }}
+    </section>
+
+
+
+{% endblock %}

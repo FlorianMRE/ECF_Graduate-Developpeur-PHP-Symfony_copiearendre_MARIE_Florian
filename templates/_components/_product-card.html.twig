@@ -1,15 +1,37 @@
-<a class="card" href="#">
-    <div class="card-container">
-        <img src="{{ asset('assets/uploads/products/') ~ product.images[0].name }}" alt="">
-{#        {% if product.publishedAt is not empty %}#}
-{#            <span class="published">{{ product.publishedAt }}</span>#}
-{#        {% endif %}#}
-        <div class="product-description">
-            <span>{{ product.title }}</span>
-            <span class="mini-text kilometre">Kilomètrage: <b> {{ product.kilometrages |number_format(0, null, '.')}}km</b></span>
-            <span class="mini-text yearsOfRelease">Année: <b> {{ product.yearsOfRelease }}</b></span>
-            <span class="mini-text price">Prix: <b> {{ (product.price / 100) |number_format(0, '', '.') }} &euro;</b></span>
-            <span><u>Voir plus</u></span>
-        </div>
-    </div>
-</a>
+{% if products is not empty %}
+    {% for product in products %}
+        <li>
+            <a class="card" href="{{ path('app_product_buy_show', {'slug': product.slug}) }}">
+                <div class="card-container">
+                    {% set principalImg = false %}
+                    
+                    {% for img in product.images %}
+
+                        {% if img.firstView is same as true %}
+                            {% set principalImg = true %}
+                            <img src="{{ asset('assets/uploads/products/') ~ img.name }}" alt="">
+                        {% endif %}
+
+                    {% endfor %}
+
+                    {% if not principalImg %}
+                            <img src="{{ asset('assets/uploads/products/') ~ product.images[0].name }}" alt="">
+                    {% endif %}
+                    {#        {% if product.publishedAt is not empty %}#}
+                    {#            <span class="published">{{ product.publishedAt }}</span>#}
+                    {#        {% endif %}#}
+                    <div class="product-description">
+                        <span>{{ product.title }}</span>
+                        <span class="mini-text kilometre">Kilomètrage: <b> {{ product.kilometrages |number_format(0, null, '.')}}km</b></span>
+                        <span class="mini-text yearsOfRelease">Année: <b> {{ product.yearsOfRelease }}</b></span>
+                        <span class="mini-text price">Prix: <b> {{ (product.price / 100) |number_format(0, '', '.') }} &euro;</b></span>
+                        <span id="more-infos"><u>Voir plus</u></span>
+                    </div>
+                </div>
+            </a>
+        </li>
+    {% endfor %}
+{% elseif products is empty %}
+    <h3>Désolé</h3>
+    <h4>Aucun résultat pour cette recherche...</h4>
+{% endif %}
