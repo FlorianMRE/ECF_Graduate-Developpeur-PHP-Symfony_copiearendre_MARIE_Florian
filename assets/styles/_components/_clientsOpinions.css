@@ -1,0 +1,35 @@
+.opinion-moderate-container > ul {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+.opinion-item {
+    padding: 1em 1.5em;
+}
+
+.opinion-item > div {
+    background: var(--color-light);
+    border-radius: 5px;
+    padding: .5em;
+}
+
+.opinion-item > div > * {
+    margin: .2em 0;
+}
+
+.opinion-item > div > p {
+    padding-left: .4em;
+}
+
+.opinion-item > div > span:last-child {
+    display: block;
+    text-align: end;
+}
+
+.opinion-item > div > div > a {
+    margin-top: .3em;
+    display: inline-block;
+    background-color: var(--color-success);
+    padding: .4em .6em;
+    border-radius: 5px;
+}
