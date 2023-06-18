@@ -1,9 +1,14 @@
 :root {
     --navbar-height: 70px;
     --footer-height: 60px;
+    --color-success: #17bd17;
     --color-dark: #171717;
     --color-light: #f1f1f1;
-    --text-large: 1.5em
+    --color-grey: #b8b8b8;
+    --color-principal-1: #ef7575;
+    --color-principal-2: #ec5e5e;
+    --color-principal-3: #ee3b3b;
+    --text-large: 1.5em;
 }
 
 *, ::before, ::after {
@@ -22,14 +27,38 @@ a {
     color: var(--color-dark)
 }
 
+textarea {
+    resize: none;
+}
+
+body {
+    width: 100dvw;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* Firefox */
+/*input[type=number] {*/
+/*    -moz-appearance: textfield;*/
+/*}*/
+
+.no-scroll {
+    overflow: hidden;
+}
+
 .mini-text {
     font-size: .8em;
 }
 
 .body-wrapper {
-    background-color: lightgray;
+    background-color: #e1e1e1;
     height: auto;
     min-height: 100vh;
+    max-width: 100dvw;
 
     display: grid;
     grid-template-rows: var(--navbar-height) 1fr var(--footer-height);
@@ -37,6 +66,7 @@ a {
 
 .main-wrapper {
     position: relative;
+    max-width: 100vw;
 }
 
 .main-container {
@@ -45,7 +75,7 @@ a {
 
 h1 {
     text-align: center;
-    margin-bottom: 2em;
+    margin-bottom: 1em;
 }
 
 .submit {
