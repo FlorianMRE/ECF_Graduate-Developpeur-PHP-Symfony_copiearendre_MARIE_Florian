@@ -21,7 +21,6 @@ class Comments
     private ?User $user = null;
 
     #[Assert\NotBlank]
-
     #[ORM\Column(type: Types::TEXT)]
     private ?string $content = null;
 

@@ -40,7 +40,7 @@ class CommentsRepository extends ServiceEntityRepository
         }
     }
 
-    public function getCommentByProductAndPushied($productId): array
+    public function getCommentByProductAndPublished($productId): array
     {
         $q = $this->createQueryBuilder('c');
             $q->andWhere(
@@ -51,6 +51,19 @@ class CommentsRepository extends ServiceEntityRepository
             );
 
         return $q->getQuery()->getResult();
+    }
+
+    public function getProductWithNoPublishedComment()
+    {
+        $q = $this->createQueryBuilder('c');
+        $q->leftJoin('c.product', 'p')
+        ->select('p.slug, p.title');
+        $q->andWhere(
+          $q->expr()->isNull('c.published_at')
+        );
+        $q->groupBy('p.id');
+
+        return $q->getQuery()->getArrayResult();
     }
 
 //    /**
