@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    {{ encore_entry_link_tags('homeCss') }}
+    {{ encore_entry_link_tags('_clientsOpinions') }}
+{% endblock %}
+
+{% block body %}
+    <h1>Bienvenue</h1>
+
+    <section id="opinion-container">
+
+        <article id="client-opnions">
+            <h2>Avis clients</h2>
+
+            <div class="client-opinion-container">
+                <ul>
+                    {% include "_components/_moderate-opinions.html.twig" %}
+                </ul>
+            </div>
+        </article>
+
+        <article id="opinion-form-container">
+            <h3>Laisser un avis</h3>
+
+            <div class="opinion-form">
+                {{ form_start(formOpinion) }}
+
+                {{ form_row(formOpinion.email) }}
+                <div class="form-firstname-lastname">
+                    {{ form_row(formOpinion.lastname) }}
+                    {{ form_row(formOpinion.firstname) }}
+                </div>
+                {{ form_row(formOpinion.comment) }}
+                {{ form_row(formOpinion.note) }}
+
+                <div class="submit">
+                    <button type="submit">Envoyer</button>
+                </div>
+                {{ form_end(formOpinion) }}
+            </div>
+        </article>
+
+    </section>
+
+{% endblock %}
