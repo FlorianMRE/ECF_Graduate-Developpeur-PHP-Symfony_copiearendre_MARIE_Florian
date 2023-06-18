@@ -1,0 +1,50 @@
+.opinion-moderate-container {
+    height: auto;
+    max-height: 350px;
+    overflow-y: scroll;
+}
+
+#no-opinions-moderate {
+    grid-column: 1/3;
+    text-align: center;
+    margin: min(2em, 40px) 0;
+}
+
+#link-account-create {
+    display: flex;
+    justify-content: center;
+    gap: 1em;
+}
+
+#link-account-create > a {
+    padding: .4em .6em;
+    background: var(--color-dark);
+    color: var(--color-light);
+    border-radius: 10px;
+}
+
+
+h2 {
+    margin-top: 1em;
+    text-align: center;
+}
+
+h2 + h4 {
+    text-align: center;
+    margin-top: .4em;
+    padding-bottom: 50px;
+    border-bottom: 1px solid var(--color-dark);
+    font-style: italic;
+}
+
+@media screen and (max-width: 500px) {
+    #link-account-create {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .opinion-moderate-container > ul {
+        display: flex !important;
+        flex-direction: column !important;
+    }
+}

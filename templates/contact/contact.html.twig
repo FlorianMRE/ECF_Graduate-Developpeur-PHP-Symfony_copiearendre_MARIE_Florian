@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello ContactController!{% endblock %}
+{% block title %}Contactez-nous{% endblock %}
 
 {% block stylesheets %}
     {{ parent() }}
@@ -11,68 +11,54 @@
     
     <h1>Aide et contact</h1>
 
-{#    <table>#}
-{#        <thead>#}
-{#        <tr>#}
-{#            <th>jour</th>#}
-{#            <th>matin-ouvert</th>#}
-{#            <th>matin-fermé</th>#}
-{#            <th>pm-ouvert</th>#}
-{#            <th>pm-fermé</th>#}
-{#        </tr>#}
-{#        </thead>#}
-{#    {% for hours in openingHours %}#}
-{#        <tr>#}
-{#            <td>{{ hours.weekday }}</td>#}
-{#            <td>{{ hours.closeday != true#}
-{#                ? hours.amopen | slice(0,2) ~ ':' ~ hours.amopen | slice(2,2)#}
-{#                : '' }}</td>#}
-{#            <td>{{ hours.closeday != true#}
-{#                ? hours.amclose | slice(0,2)  ~ ':' ~ hours.amclose | slice(2,2)#}
-{#                : ''}}</td>#}
-{#            <td>{{ (hours.pmopen is not empty)#}
-{#                ? hours.pmopen | slice(0,2) ~ ':' ~ hours.pmopen | slice(2,2)#}
-{#                : hours.closeday == true ? ''#}
-{#                : 'fermé' }}</td>#}
-{#            <td>{{ (hours.pmclose is not empty)#}
-{#                ? hours.pmclose | slice(0,2) ~ ':' ~ hours.pmclose | slice(2,2)#}
-{#                : hours.closeday == true ? ''#}
-{#                : 'fermé' }}</td>#}
-{#            <td>{{ hours.closeday }}</td>#}
-{#        </tr>#}
-{#    {% endfor %}#}
+    <section id="contact-hours-and-contact-mail">
+        <div class="hours-contact">
+            <h4>Horaires d'ouverture</h4>
+            <ul>
+                {% for hours in openingHours %}
+                    <li>
+                        <span>{{ hours.weekDay|capitalize }}</span>
+                        <div class="hours">
+                        {% if hours.closeDay != true %}
+                            <span>{{ (hours.amOpen) ? hours.amopen|date("H:i") : '' }}</span>
+                            <span>{{ (hours.amClose) ? hours.amClose|date("H:i") : '' }}</span>
+                            <span>{{ (hours.pmOpen) ? hours.pmOpen|date("H:i") : '' }}</span>
+                            <span>{{ (hours.pmClose) ? hours.pmClose|date("H:i") : '' }}</span>
+                        {% else %}
+                            <span class="closed-hour">Fermé</span>
+                        {% endif %}
+                        </div>
+                        {% if  app.user and ("ROLE_ADMIN" in app.user.roles) %}
+                            <a class="mini-text" href="{{ path('app_admin_contact_edit', {'week_day': hours.weekDay}) }}">(éditer)</a>
+                        {% endif %}
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
 
-{#        {% for hours in openingHours %}#}
-{#            <tr>#}
-{#                <td>{{ hours.day }}</td>#}
-{#                <td>{{ hours.amopen }}</td>#}
-{#                <td>{{ hours.amclose }}</td>#}
-{#                <td>{{ hours.pmopen }}</td>#}
-{#                <td>{{ hours.pmclose }}</td>#}
-{#            </tr>#}
-{#        {% endfor %}#}
-{#    </table>#}
+        <div id="contact-mail">
+            <h3>Contacter le grarage</h3>
+            {{ form_start(contactMailForm) }}
 
-    <div class="hours-contact">
-        <h4>Horaires d'ouverture</h4>
-        <ul>
-            {% for hours in openingHours %}
-                <li>
-                    <div>{{ hours.weekDay|capitalize }}</div>
-                    <div class="hours">
-                    {% if hours.closeDay != true %}
-                        <span>{{ (hours.amOpen) ? hours.amopen|date("H:i") : '' }}</span>
-                        <span>{{ (hours.amClose) ? hours.amClose|date("H:i") : '' }}</span>
-                        <span>{{ (hours.pmOpen) ? hours.pmOpen|date("H:i") : '' }}</span>
-                        <span>{{ (hours.pmClose) ? hours.pmClose|date("H:i") : '' }}</span>
-                    {% else %}
-                        <span class="closed-hour">Fermé</span>
-                    {% endif %}
-                    </div>
-                </li>
-            {% endfor %}
-        </ul>
-    </div>
+            <div>
+                {{ form_row(contactMailForm.email) }}
+            </div>
+            <div>
+                {{ form_row(contactMailForm.firstname) }}
+            </div>
+            <div>
+                {{ form_row(contactMailForm.lastname) }}
+            </div>
+            <div>
+                {{ form_row(contactMailForm.message) }}
+            </div>
+
+            <div class="submit">
+                <button type="submit">Envoyer</button>
+            </div>
+            {{ form_end(contactMailForm) }}
+        </div>
+    </section>
 
     <div class="client-informations">
         <div>{{ clientsInformations.entrepriseName }}</div>

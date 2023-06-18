@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mon compte{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    {{ encore_entry_link_tags('accountCss') }}
+    {{ encore_entry_link_tags('_clientsOpinions') }}
+{% endblock %}
+
+{% block body %}
+    <h1>Mon compte</h1>
+
+        {% if "ROLE_EMPLOYEES" in app.user.roles %}
+            <div id="link-account-create">
+                <a href="{{ path('app_prestation_create') }}">Créer une prestation</a>
+            {% if "ROLE_ADMIN" in app.user.roles %}
+                <a href="{{ path('app_admin_user_create') }}">Créer un employé</a>
+            {% endif %}
+            </div>
+        {% endif %}
+
+
+    {% if "ROLE_MODERATOR" in app.user.roles %}
+        <section class="opinion-moderate">
+            <h3 style="text-align: center; margin-top: 1em">Avis à modérés</h3>
+            <div class="opinion-moderate-container">
+                <ul>
+                    {% include "_components/_moderate-opinions.html.twig" %}
+                </ul>
+            </div>
+        </section>
+    {% endif %}
+    
+    <h2>Bonjour {{ app.user.lastname|upper }} {{ app.user.firstname }}</h2>
+    <h4>Vous êtes sur le site du garage de Vincent Parrot</h4>
+{% endblock %}

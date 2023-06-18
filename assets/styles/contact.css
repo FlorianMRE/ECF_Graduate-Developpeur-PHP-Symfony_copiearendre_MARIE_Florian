@@ -20,7 +20,7 @@ form#hours {
 
 .hours-contact > ul > li {
     display: grid;
-    grid-template-columns: 25% 1fr;
+    grid-template-columns: 25% 1fr max-content;
     text-align: center;
     margin: .5em 0;
 }
@@ -93,7 +93,6 @@ form#hours {
 }
 
 label {
-    font-size: 1.5rem;
     margin-right: .5em;
 }
 
@@ -117,4 +116,72 @@ label + input[type=checkbox] {
     display: grid;
     grid-template-columns: auto 50px;
     justify-content: center;
+}
+
+.client-informations a {
+    color: var(--color-principal-3);
+    font-style: italic;
+}
+
+.client-informations > div{
+    margin-top: .5em;
+}
+
+#contact-hours-and-contact-mail {
+    display: flex;
+}
+
+#contact-mail {
+    flex: 1;
+    padding: 20px;
+    text-align: center;
+}
+
+#contact-mail > form {
+    margin-top: 20px;
+    width: 60%;
+    margin-inline: auto;
+}
+
+#contact-mail > form input, #contact-mail > form textarea {
+    padding: .4em;
+}
+
+#contact-mail > form input {
+    text-align: center;
+}
+
+#contact-mail > form textarea {
+    height: 100px;
+}
+
+#contact-mail > form > div > div {
+    margin-top: .2em;
+    display: flex;
+    flex-direction: column;
+}
+
+@media screen and (max-width: 900px) {
+    #contact-hours-and-contact-mail {
+        flex-direction: column;
+    }
+
+    .hours-contact {
+        margin-inline: auto;
+        width: 90%;
+    }
+
+    .hours-contact > ul > li {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .hours-contact > ul > li > span {
+        font-weight: bold;
+        margin-bottom: .3em;
+    }
+
+    #contact-mail > form {
+        width: 90%;
+    }
 }
