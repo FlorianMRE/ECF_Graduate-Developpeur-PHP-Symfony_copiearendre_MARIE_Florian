@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello RegisterController!{% endblock %}
+{% block title %}Inscription{% endblock %}
 
 {% block stylesheets %}
     {{ parent() }}
@@ -11,12 +11,23 @@
 
     <h1>Inscription</h1>
 
-    {{ form_errors(formView) }}
+    <div class="error">
+        {{ form_errors(formView) }}
+    </div>
 
     <div class="register-container">
         <div class="form-container">
             {{ form_start(formView) }}
             <div class="form-items-container">
+                {% if app.request.get('_route') == 'app_admin_user_create' %}
+                    <div class="form-items">
+                        <select name="roles-select" id="role">
+                            <option value="" disabled selected>-- Choisir un role --</option>
+                            <option value="ROLE_ADMIN" >Role admin</option>
+                            <option value="ROLE_EMPLOYEES" >Role employé</option>
+                        </select>
+                    </div>
+                {% endif %}
                 <div class="form-items">
                     {{ form_row(formView.gender) }}
                 </div>

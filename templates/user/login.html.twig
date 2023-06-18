@@ -1,5 +1,7 @@
 {% extends 'base.html.twig' %}
 
+{% block title %}Connexion{% endblock %}
+
 {% block stylesheets %}
     {{ parent() }}
     {{ encore_entry_link_tags('_form') }}
@@ -38,7 +40,7 @@
                 <a href="{{ path('app_register') }}">Créer un compte</a>
             </div>
             <div class="follow-login">
-                <span>Suivez-nous sur nos différents réseaux</span>
+                <span style="display: block">Suivez-nous sur nos différents réseaux</span>
                 <span>Instagram</span>
                 <span>Twitter</span>
                 <span>Snapchat</span>
