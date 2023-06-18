@@ -23,13 +23,23 @@ Encore
     .addEntry('app', './assets/app.js')
     .addEntry('_navBar', './assets/_Components/_NavBar.js')
     .addEntry('_footer', './assets/_Components/_footer.js')
+    .addEntry('contactJs', './assets/contact.js')
+    .addEntry('productJs', './assets/product.js')
+
+    // ------------------------- ↑ JS ↑ -------------------------
+
+    // ------------------------- ↓ CSS ↓ ------------------------
+
     .addEntry('_form', './assets/styles/_components/_form.css')
     .addEntry('_filter', './assets/styles/_components/_filter.css')
     .addEntry('_productCard', './assets/styles/_components/_productCard.css')
+    .addEntry('_clientsOpinions', './assets/styles/_components/_clientsOpinions.css')
     .addEntry('contactCss', './assets/styles/contact.css')
     .addEntry('productCss', './assets/styles/product.css')
-    .addEntry('contactJs', './assets/contact.js')
-    .addEntry('productJs', './assets/product.js')
+    .addEntry('homeCss', './assets/styles/home.css')
+    .addEntry('accountCss', './assets/styles/account.css')
+    .addEntry('prestationCss', './assets/styles/prestation.css')
+
     .enableSingleRuntimeChunk()
 
     // enables the Symfony UX Stimulus bridge (used in assets/bootstrap.js)
