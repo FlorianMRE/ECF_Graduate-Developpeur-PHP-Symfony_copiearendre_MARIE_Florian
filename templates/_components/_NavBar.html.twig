@@ -1,6 +1,13 @@
 <nav>
     <div class="nav-container">
         <div class="left-navbar">
+
+            <div class="hamburger-menu">
+                <span class="menu-line top"></span>
+                <span class="menu-line middle"></span>
+                <span class="menu-line bottom"></span>
+            </div>
+
             <a id="logo-link" href="{{ path('app_home') }}">
                 <img src="" alt="Logo du garage V.Parrot">
             </a>
@@ -11,29 +18,38 @@
                 <li>
                     <a href="{{ path('app_products_buying') }}">Achats</a>
                 </li>
-                <li>
-                    <a href="{{ path('app_products_selling') }}">Vente</a>
-                </li>
+                {% if app.user and ("ROLE_EMPLOYEES" in app.user.roles) %}
+                    <li>
+                        <a href="{{ path('app_products_selling') }}">Ajouter un véhicule</a>
+                    </li>
+                {% endif %}
                 <li>
                     <a href="{{ path('app_contact') }}">Contact</a>
                 </li>
             </ul>
         </div>
-        <div class="search-bar">
-            <div class="search-container">
-                <input id="search-input" type="text">
-            </div>
-        </div>
         <div class="right-navbar">
-            <div class="account-items">
-                <ul>
-                    <li>
-                        <a href="{{ path('app_register') }}" class="btn" id="register">Inscription</a>
-                    </li>
-                    <li>
-                        <a href="{{ path('app_login') }}" class="btn" id="login">Connexion</a>
-                    </li>
-                </ul>
+            <div class="account-item">
+                    <span class="dropdown-item">
+                        <img src="{{ asset('assets/svg/user.svg') }}" alt="Logo pour mon compte" height="20px" width="20px">
+                        <ul>
+                        {% if app.user %}
+                            <li>
+                                <a href='{{ path('app_account') }}' style="color: var(--color-light)">Mon compte</a>
+                            </li>
+                            <li>
+                                <a href="{{ path('app_logout') }}">Se déconnecter</a>
+                            </li>
+                        {% else %}
+                            <li>
+                                <a href="{{ path('app_register') }}" style="color: var(--color-light)">Inscription</a>
+                            </li>
+                            <li>
+                                <a href="{{ path('app_login') }}" st>Connexion</a>
+                            </li>
+                        {% endif %}
+                        </ul>
+                    </span>
             </div>
         </div>
     </div>
