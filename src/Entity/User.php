@@ -19,6 +19,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private ?int $id = null;
 
     #[ORM\Column(length: 180, unique: true)]
+    #[Assert\Email(message: 'Ceci n\'est pas un email valide')]
     #[Assert\NotBlank(message: 'Le champ email ne doit pas être vide')]
     #[Assert\Email(message: 'Cet email n\'est pas un {{ value }} email valide')]
     private ?string $email = null;
@@ -31,10 +32,15 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     #[ORM\Column]
     #[Assert\Length(
-        min: 6,
+        min: 8,
         max: 255,
-        minMessage: 'Votre mot de passe doit contenir 6 charactère au minimum',
+        minMessage: 'Votre mot de passe doit contenir 8 charactère au minimum',
         maxMessage: 'Votre mot de passe ne doit pas contenir plus de 255 charactère'
+    )]
+    #[Assert\Regex(
+    pattern: "/^(?=.*[a-z])(?=.*\d).{6,}$/i",
+    match:true,
+    message:"Votre mot de passe doit comporter des lettres majuscules et minuscules, un chiffre et un symbole."
     )]
     private ?string $password = null;
 
