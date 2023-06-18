@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Nos prestations{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    {{ encore_entry_link_tags('prestationCss') }}
+{% endblock %}
+
+{% block body %}
+    {% set count = 0 %}
+    <h1>Nos prestations</h1>
+
+    <section id="prestation-container">
+        <ul>
+        {% for prestation in allPrestations %}
+            <li class="prestation-card {{ count is odd ? 'invert' : '' }}">
+                <h3>{{ prestation.title }}</h3>
+                <p>{{ prestation.description }}</p>
+            {% if "ROLE_EMPLOYEES" in app.user.roles %}
+                <span>
+                    <a href="{{ path('app_prestation_delete', {'id': prestation.id}) }}">supprimer</a>
+                </span>
+            {% endif %}
+            </li>
+            {% set count = count + 1 %}
+        {% endfor %}
+        </ul>
+    </section>
+
+{% endblock %}
