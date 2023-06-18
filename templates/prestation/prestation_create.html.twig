@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Création d'une prestation{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    {{ encore_entry_link_tags('_form') }}
+{% endblock %}
+
+{% block body %}
+    
+    <h1>Création d'une prestation</h1>
+
+    <div class="form-container">
+        {{ form_start(formPrestation) }}
+
+        <div class="form-items-container">
+            <div class="form-items">
+                {{ form_row(formPrestation.title) }}
+            </div>
+            <div class="form-items prestation-description">
+                {{ form_row(formPrestation.description) }}
+            </div>
+        </div>
+
+        <div class="submit">
+            <button type="submit">Envoyer</button>
+        </div>
+
+        {{ form_end(formPrestation) }}
+
+    </div>
+{% endblock %}
