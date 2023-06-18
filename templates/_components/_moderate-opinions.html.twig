@@ -1,0 +1,24 @@
+{% if opinions is not empty %}
+    {% for opinion in opinions %}
+       <li class="opinion-item">
+           <div>
+               {% if app.request.get('_route') == 'app_account' %}
+                   <span class="mini-text" style="display: block">{{ opinion.email }}</span>
+               {% endif %}
+               <span>{{ opinion.lastname|upper }} {{ opinion.firstname }}</span>
+               <p>{{ opinion.comment }}</p>
+               <span>Note: {{ opinion.note }} / 10</span>
+               {% if app.request.get('_route') == 'app_account' %}
+                   <span>{{ opinion.createdAt|date("m/d/Y H:i") }}</span>
+                   <div style="text-align: end">
+                       <a href="{{ path('app_opinion_validate', {'id': opinion.id}) }}">Valider l'avis</a>
+                   </div>
+               {% else %}
+                   <span>{{ opinion.publishedAt|date("m/d/Y H:i") }}</span>
+               {% endif %}
+           </div>
+       </li>
+    {% endfor %}
+{% elseif opinions is empty %}
+    <span id="no-opinions-moderate">Pas d'avis à modéré pour le moment...</span>
+{% endif %}
