@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello ModeratorController!{% endblock %}
+
+{% block body %}
+    
+    <h1>Espace modération des commentaires</h1>
+    
+    <h3>Commentaires non publiés rangés par produit</h3>
+
+    <ul>
+        {% for product in products %}
+            <li>
+                <a href="{{ path('app_product_buy_show', {'slug': product.slug}) }}">
+                    <div class="comment-item">
+                        <span>{{ product.title }}</span>
+                    </div>
+                </a>
+            </li>
+        {% endfor %}
+    </ul>
+
+{% endblock %}
