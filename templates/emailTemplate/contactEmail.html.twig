@@ -1,0 +1,8 @@
+<h1>Contact pour le produit suivant: {{ contactEmail.product.title }}</h1>
+
+<h2>
+    <span style="display: block">Message de {{ contactEmail.lastname|upper }} {{ contactEmail.firstname }}</span>
+    <span style="font-size: .6em">{{ contactEmail.email }}</span>
+</h2>
+<br>
+<p>{{ contactEmail.message }}</p>
