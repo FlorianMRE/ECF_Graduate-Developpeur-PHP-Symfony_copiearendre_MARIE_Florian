@@ -1,5 +1,12 @@
+select {
+    text-align: center;
+    background: var(--color-light);
+    color: var(--color-dark);
+    border: 1px solid var(--color-dark);
+    border-radius: .1em;
+}
+
 .filters {
-    background: lightblue;
     display: flex;
     text-align: center;
     flex-direction: column;
@@ -14,9 +21,58 @@
     margin-inline: .7em;
 }
 
-#form-filter {
+.filters > form {
     max-width: 600px;
     width: 100%;
-    background: lightpink;
+    margin-inline: auto;
+}
+
+#form-checkbox, #filter-container > div {
+    border-bottom: 2px dashed var(--color-grey);
+    padding-bottom: .3em;
+    margin-top: .3em;
+}
+
+#filter-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+#filter-container > div {
+    display: grid;
+    grid-template-columns: repeat(4, 25%);
+    justify-content: flex-end;
+}
+
+#order-container {
+    text-align: center;
+    margin-top: 2em;
+}
+
+#btn-filter {
+    display: none;
+}
+
+@media screen and (max-width: 1000px) {
+    .filters {
+        display: none;
+    }
+
+    #btn-filter {
+        display: block;
+    }
+
+    .filters.active {
+        display: block;
+        margin-top: 1em;
+    }
+}
+
+#btn-filter {
+    background: var(--color-dark);
+    color: var(--color-light);
+    border: none;
+    width: 30%;
     margin-inline: auto;
 }
