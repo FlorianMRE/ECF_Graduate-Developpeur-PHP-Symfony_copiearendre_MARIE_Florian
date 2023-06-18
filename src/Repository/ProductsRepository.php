@@ -88,6 +88,9 @@ class ProductsRepository extends ServiceEntityRepository
             } elseif (str_contains($options['order'], 'price_')) {
                 $order = substr($options['order'], strpos($options['order'], "_") +1, null);
                 $q->orderBy('p.price', $order);
+            } elseif (str_contains($options['order'], 'created_')) {
+                $order = substr($options['order'], strpos($options['order'], "_") +1, null);
+                $q->orderBy('p.createdAt', $order);
             }
         }
 

@@ -164,22 +164,14 @@ let params = new URLSearchParams(url.search)
 
 params.set('order', paramss)
 url.search = params.toString()
+select = document.querySelector('#order-select');
 
-$('.order-link').click(event => {
-
+select.addEventListener('change', event => {
 
     let url = new URL(window.location.href)
     let params = new URLSearchParams(url.search)
 
-    if (event.target.id === 'orderPrice') {
-        paramss = paramss === 'price_DESC' ? 'price_ASC' : 'price_DESC'
-    }
-
-    if (event.target.id === 'orderName') {
-        paramss = paramss === 'name_DESC' ? 'name_ASC' : 'name_DESC'
-    }
-
-    ur.set('order', paramss)
+    ur.set('order', select.value)
     url.search = params.toString()
 
     event.preventDefault()
@@ -192,17 +184,30 @@ $('.order-link').click(event => {
         type : "get",
         async: true,
         success : function(data) {
-            params.set('order', paramss)
-            url.search = params.toString()
             window.history.pushState("", "", buyUrl + '?' + ur.toString())
 
             contextUl.innerHTML = data
-            paramss = url.searchParams.get("order")
         }
     })
 
 });
 
+
+filterBtn = document.querySelector('#btn-filter')
+
+filterBtn.addEventListener('click', (event) => {
+    filterBtn.classList.toggle('active')
+    $('div.filters').toggleClass('active')
+})
+
+document.querySelectorAll('#form-filter input').forEach(item => {
+
+    item.addEventListener('input', (e) => {
+        if (item.value.length > 4) {
+            return false
+        }
+    })
+})
 
 
 // ---------------------- Product Show ----------------------

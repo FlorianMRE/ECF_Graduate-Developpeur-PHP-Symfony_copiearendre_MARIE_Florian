@@ -3,25 +3,25 @@
 namespace App\Controller;
 
 use App\Entity\Comments;
+use App\Entity\ContactMail;
 use App\Entity\Images;
 use App\Entity\Products;
 use App\Entity\Type;
 use App\Entity\User;
 use App\Form\CommentType;
+use App\Form\ContactMailType;
 use App\Form\FilterType;
 use App\Form\ProductType;
 use App\Services\CommentService;
+use App\Services\ContactMailService;
 use App\Services\ImageService;
 use App\Services\ProductService;
 use Doctrine\ORM\EntityManagerInterface;
-use phpDocumentor\Reflection\Types\Null_;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Exception\BadRequestException;
-use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\String\Slugger\SluggerInterface;
 
 class ProductsController extends AbstractController
 {
@@ -61,7 +61,7 @@ class ProductsController extends AbstractController
     }
 
 
-    #[Route('/sell', name: 'app_products_selling')]
+    #[Route('/employees/sell', name: 'app_products_selling')]
     public function create(
         Request $request,
         ProductService $productService,
@@ -93,12 +93,6 @@ class ProductsController extends AbstractController
                     $img->setName($fichier);
                     $product->addImage($img);
 
-//dd($image->getClientOriginalName());
-//                    dd($form->get('images')->getData()[0]->getClientOriginalName());
-//                    dd('la', $images[0]->getClientOriginalName());
-//                    dd($images[0]->getClientOriginalName() === $img->getOriginalName());
-//                    dd($images);
-
                     if ($images[0]->getClientOriginalName() === $img->getOriginalName()){
                         $img->setFirstView(true);
                     } else {
@@ -127,7 +121,8 @@ class ProductsController extends AbstractController
     public function productShow(
         Products $product,
         Request $request,
-        CommentService $commentService
+        CommentService $commentService,
+        ContactMailService $contactMailService
     ): Response
     {
 
@@ -147,13 +142,28 @@ class ProductsController extends AbstractController
             }
         }
 
-//        $allComments = $this->em->getRepository(Comments::class)->findBy(['product' => $product, 'published_at' => null]);
+        $allComments = $this->em->getRepository(Comments::class)->findBy(['product' => $product->getId()]);
 
-        $allComments = $this->em->getRepository(Comments::class)->getCommentByProductAndPushied($product->getId());
+        $contactMail = new ContactMail();
 
-//        dd($allComments);
+        $contactMailForm = $this->createForm(ContactMailType::class, $contactMail);
+
+        $contactMailForm->handleRequest($request);
+
+        if ($contactMailForm->isSubmitted() && $contactMailForm->isValid()) {
+
+            $contactMail->setProduct($product);
+
+            $contactMailService->sendEmail($contactMail);
+
+            unset($contactMail);
+            unset($contactMailForm);
+            $contactMail = new ContactMail();
+            $contactMailForm = $this->createForm(ContactMailType::class, $contactMail);
+        }
 
         return $this->render('products/productShow.html.twig', [
+            'contactMailForm' => $contactMailForm,
             'commentForm' => $commentForm,
             'allComments' => $allComments,
             'product' => $product

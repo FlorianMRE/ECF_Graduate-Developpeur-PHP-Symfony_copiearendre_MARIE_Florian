@@ -1,6 +1,6 @@
 {% extends './base.html.twig' %}
 
-{% block title %}Création de produits{% endblock %}
+{% block title %}Création d'un véhicule{% endblock %}
 
 {% block stylesheets %}
     {{ parent() }}
@@ -9,13 +9,12 @@
 
 {% block body %}
 
-    <div class="main-wrapper">
 
         {% if app.request.get('_route') == 'app_admin_product_edit' %}
             <h1>Édition d'un produit </h1>
             <h2 class="product-edit"><span>Produit à modifier :</span> {{ product.name }}</h2>
         {% else %}
-            <h1>Vendre mon véhicule</h1>
+            <h1>Ajouter un véhicule</h1>
         {% endif %}
 
         <div class="form-container">
@@ -68,7 +67,6 @@
                 </div>
             </div>
         {% endif %}
-    </div>
 
 
 {% endblock %}

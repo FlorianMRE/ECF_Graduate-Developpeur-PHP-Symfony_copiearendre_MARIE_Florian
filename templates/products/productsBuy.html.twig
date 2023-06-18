@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello ProductsController!{% endblock %}
+{% block title %}Véhicules en vente{% endblock %}
 
 {% block stylesheets %}
     {{ parent() }}
@@ -16,6 +16,7 @@
 {% block body %}
     <h1>Nos différents produits</h1>
     
+    <button class="btn" id="btn-filter">Filtrer</button>
     <div class="filters">
         <form id="form-checkbox">
             {% for type in types %}
@@ -27,35 +28,45 @@
         </form>
 
 
-        <form id="form-filter">
-            <div class="price-filter">
-                <label for="min_price">Prix minimum</label>
-                <input type="number" name="price-min" id="min_price">
+        <form id="form-filter" autocomplete="off">
+            <div id="filter-container">
+                <div class="price-filter">
+                    <label for="min_price">Prix minimum</label>
+                    <input type="number" name="price-min" id="min_price">
 
-                <label for="max_price">Prix maximum</label>
-                <input type="number" name="price-max" id="max_price">
-            </div>
-            <div class="kilometrages-filter">
-                <label for="kilometrages-min">Km min</label>
-                <input type="number" name="km-min" id="kilometrages-min">
+                    <label for="max_price">Prix maximum</label>
+                    <input type="number" name="price-max" id="max_price">
+                </div>
+                <div class="kilometrages-filter">
+                    <label for="kilometrages-min">Km min</label>
+                    <input type="number" name="km-min" id="kilometrages-min">
 
-                <label for="kilometrages-max">Km max</label>
-                <input type="number" name="km-max" id="kilometrages-max">
-            </div>
-            <div class="releaseYear-filter">
-                <label for="releaseYear-min">Année min</label>
-                <input type="number" name="releaseYear-min" id="releaseYear-min">
+                    <label for="kilometrages-max">Km max</label>
+                    <input type="number" name="km-max" id="kilometrages-max">
+                </div>
+                <div class="releaseYear-filter">
+                    <label for="releaseYear-min">Année min</label>
+                    <input type="number" name="releaseYear-min" id="releaseYear-min">
 
-                <label for="releaseYear-max">Année max</label>
-                <input type="number" name="releaseYear-max" id="releaseYear-max">
+                    <label for="releaseYear-max">Année max</label>
+                    <input type="number" name="releaseYear-max" id="releaseYear-max">
+                </div>
             </div>
         </form>
 
     </div>
 
-    <div class="order">
-        <a id="orderName" class="order-link" href="{{ path('app_products_buying') }}">Nom</a>
-        <a id="orderPrice" class="order-link" href="{{ path('app_products_buying') }}">Prix</a>
+    <div id="order-container">
+
+        <select name="order-select" id="order-select">
+            <option value="" disabled selected>-- Choisir un ordre --</option>
+            <option value="name_ASC">Nom croissant</option>
+            <option value="name_DESC">Nom décroissant</option>
+            <option value="price_ASC">Prix croissant</option>
+            <option value="price_DESC">Prix décroissant</option>
+            <option value="created_ASC">Date de création décroissant</option>
+            <option value="created_DESC">Date de creéation décroissant</option>
+        </select>
     </div>
 
     <ul id="product-grid">

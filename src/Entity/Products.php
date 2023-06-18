@@ -7,6 +7,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: ProductsRepository::class)]
 class Products
@@ -17,18 +18,26 @@ class Products
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank(message: 'Ce champ ne doit pas être vide')]
     private ?string $title = null;
 
     #[ORM\Column]
+    #[Assert\NotBlank(message: 'Ce champ ne doit pas être vide')]
+    #[Assert\PositiveOrZero]
     private ?int $price = null;
 
     #[ORM\Column(type: Types::TEXT)]
+    #[Assert\NotBlank]
     private ?string $description = null;
 
     #[ORM\Column]
+    #[Assert\NotBlank(message: 'Ce champ ne doit pas être vide')]
+    #[Assert\PositiveOrZero]
     private ?int $kilometrages = null;
 
     #[ORM\Column]
+    #[Assert\NotBlank(message: 'Ce champ ne doit pas être vide')]
+    #[Assert\Positive]
     private ?int $years_of_release = null;
 
     #[ORM\OneToMany(mappedBy: 'products', targetEntity: Images::class, orphanRemoval: true, cascade: ['persist'])]
@@ -53,10 +62,14 @@ class Products
     #[ORM\OneToMany(mappedBy: 'product', targetEntity: Comments::class, orphanRemoval: true)]
     private Collection $comments;
 
+    #[ORM\OneToMany(mappedBy: 'product', targetEntity: ContactMail::class)]
+    private Collection $contactMails;
+
     public function __construct()
     {
         $this->images = new ArrayCollection();
         $this->comments = new ArrayCollection();
+        $this->contactMails = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -250,6 +263,36 @@ class Products
             // set the owning side to null (unless already changed)
             if ($comment->getProduct() === $this) {
                 $comment->setProduct(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, ContactMail>
+     */
+    public function getContactMails(): Collection
+    {
+        return $this->contactMails;
+    }
+
+    public function addContactMail(ContactMail $contactMail): self
+    {
+        if (!$this->contactMails->contains($contactMail)) {
+            $this->contactMails->add($contactMail);
+            $contactMail->setProduct($this);
+        }
+
+        return $this;
+    }
+
+    public function removeContactMail(ContactMail $contactMail): self
+    {
+        if ($this->contactMails->removeElement($contactMail)) {
+            // set the owning side to null (unless already changed)
+            if ($contactMail->getProduct() === $this) {
+                $contactMail->setProduct(null);
             }
         }
 

@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello ProductsController!{% endblock %}
+{% block title %}Vue produit: {{ product.title }}{% endblock %}
 
 {% block stylesheets %}
     {{ parent() }}
@@ -41,11 +41,23 @@
     </section>
     <section id="allCommentsContainer">
         {% for comment in allComments %}
-            <div class="comment-card {{ comment.user == app.user ? 'personnal-comment' : ''}}">
-                <span id="user-infos"><b>{{ comment.user.lastname |upper }} {{ comment.user.firstname }}</b></span>
-                <p>{{ comment.content |capitalize}}</p>
-                <span id="publishe-at" class="mini-text">Publié le: {{ comment.publishedAt }}</span>
-            </div>
+            {% if (comment.publishedAt is not null) or ("ROLE_MODERATOR" in app.user.roles) %}
+                <div class="comment-card {{
+                comment.publishedAt is null ? 'not-published-comment' :
+                comment.user == app.user ? 'personnal-comment'
+                : ''}}">
+                    <div id="user-infos">
+                        <span><u><b>{{ comment.user.lastname |upper }} {{ comment.user.firstname }}</b></u></span>
+                        {% if "ROLE_MODERATOR" in comment.user.roles %}
+                            <span class="mini-text">(Modérateur)</span>
+                        {% elseif "ROLE_ADMIN" in comment.user.roles %}
+                            <span class="mini-text">(Propriétaire)</span>
+                        {% endif %}
+                    </div>
+                    <p>{{ comment.content |capitalize}}</p>
+                    <span id="publishe-at" class="mini-text">Publié le: {{ comment.publishedAt }}</span>
+                </div>
+            {% endif %}
         {% endfor %}
     </section>
 
@@ -61,6 +73,29 @@
         </div>
 
         {{ form_end(commentForm) }}
+    </section>
+
+    <section id="form-contactMail">
+        <h3>Contacter le grarage</h3>
+        {{ form_start(contactMailForm) }}
+
+        <div>
+            {{ form_row(contactMailForm.email) }}
+        </div>
+        <div>
+            {{ form_row(contactMailForm.firstname) }}
+        </div>
+        <div>
+            {{ form_row(contactMailForm.lastname) }}
+        </div>
+        <div>
+            {{ form_row(contactMailForm.message) }}
+        </div>
+
+        <div class="submit">
+            <button type="submit">Envoyer</button>
+        </div>
+        {{ form_end(contactMailForm) }}
     </section>
 
 

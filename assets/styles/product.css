@@ -96,7 +96,6 @@
 /* --------------- Form --------------- */
 
 #form-container > form {
-    margin-left: 4%;
     height: 100%;
 }
 
@@ -114,7 +113,8 @@
 #comment > textarea {
     height: 100px;
     padding: 0.5em;
-    margin-inline: 4%;
+    margin-inline: auto;
+    width: 50%;
 }
 
 #comment-submit-btn {
@@ -156,7 +156,6 @@
 }
 
 #user-infos {
-    text-decoration: underline;
     margin-bottom: .4em;
     display: block;
 }
@@ -170,4 +169,36 @@
 .comment-card > #publishe-at {
     display: block;
     text-align: end;
+}
+
+.not-published-comment {
+    border: 5px solid var(--color-principal-2);
+    align-self: center;
+}
+
+/* --------------- ContactMail --------------- */
+
+#form-contactMail {
+    text-align: center;
+    margin: 50px auto;
+    width: 60%;
+}
+
+#form-contactMail input, #form-contactMail textarea {
+    padding: .4em;
+}
+
+#form-contactMail input {
+    text-align: center;
+}
+
+#form-contactMail textarea {
+    height: 8em;
+}
+
+#form-contactMail > form > div > div {
+    display: flex;
+    flex-direction: column;
+    gap: .2em;
+    margin-top: 20px;
 }
