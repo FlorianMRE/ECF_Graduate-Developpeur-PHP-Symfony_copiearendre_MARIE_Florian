@@ -13,7 +13,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class AdminContactController extends AbstractController
 {
-    #[Route('/admin/contact/edit/{week_day}', name: 'app_admin_admin_contact')]
+    #[Route('/admin/contact/edit/{week_day}', name: 'app_admin_contact_edit')]
     public function setHours(
         OpeningHours $openingHour,
         Request $request,
