@@ -13,12 +13,20 @@ use Symfony\Component\Form\Extension\Core\Type\TelType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\CallbackTransformer;
 
 class RegisterType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
+            ->add('roles', ChoiceType::class, [
+                'label' => 'Role utilisateur',
+                'choices' => [
+                    'Employé' => "ROLE_EMPLOYEES",
+                    'Modérateur' => "ROLE_MODERATOR",
+                ]
+            ])
             ->add('gender', ChoiceType::class, [
                 'label' => 'Genre',
                 'placeholder' => 'Choisissez votre Genre',
@@ -70,6 +78,17 @@ class RegisterType extends AbstractType
                 'error_bubbling' => true
             ])
         ;
+        $builder->get('roles')
+            ->addModelTransformer(new CallbackTransformer(
+                function ($rolesArray) {
+                    // transform the array to a string
+                    return  $rolesArray[0];
+                },
+                function ($rolesString) {
+                    // transform the string back to an array
+                    return [$rolesString];
+                }
+            ));
     }
 
     public function configureOptions(OptionsResolver $resolver): void
