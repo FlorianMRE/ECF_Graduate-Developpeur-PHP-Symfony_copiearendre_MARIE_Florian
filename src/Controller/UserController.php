@@ -60,6 +60,8 @@ class UserController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
 
+            $user->setRoles([]);
+
             dd($user->getRoles());
 
             $plaintextPassword = $user->getPassword();
