@@ -8,9 +8,6 @@
                 <span class="menu-line bottom"></span>
             </div>
 
-            <a id="logo-link" href="{{ path('app_home') }}">
-                <img src="" alt="Logo du garage V.Parrot">
-            </a>
             <ul class="list-container">
                 <li>
                     <a href="{{ path('app_services') }}">Prestations</a>
@@ -27,6 +24,11 @@
                     <a href="{{ path('app_contact') }}">Contact</a>
                 </li>
             </ul>
+        </div>
+        <div class="logo">
+            <a id="logo-link" href="{{ path('app_home') }}">
+                <img src="{{ asset('assets/logo/Sans titre - 1.svg') }}" width="100%" height="auto" alt="Logo du garage V.Parrot">
+            </a>
         </div>
         <div class="right-navbar">
             <div class="account-item">

@@ -8,19 +8,43 @@ nav {
 
 .nav-container {
     display: grid;
-    grid-template-columns: 70% 30%;
+    grid-template-columns: auto 1fr auto;
     justify-content: space-between;
     align-items: center;
     height: 100%;
     padding-inline: 2em;
+    grid-template-areas: 'logo menu account';
 }
 
 .left-navbar {
     display: flex;
 }
 
-.left-navbar > #logo-link {
+.logo {
+    grid-area: logo;
+}
+
+.logo > #logo-link {
+    grid-area: 1/2;
     margin-right: 2em;
+    max-width: 9rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+@media screen and (max-width: 600px) {
+    .logo > #logo-link {
+        margin: 0;
+    }
+
+    .nav-container {
+        padding-inline: 15px;
+    }
+
+    .dropdown-item {
+        margin-inline: 0 !important;
+    }
 }
 
 .list-container {
@@ -165,6 +189,7 @@ nav {
 
 .right-navbar {
     height: 100%;
+    margin-right: 20px;
 }
 
 .account-item {
@@ -252,6 +277,19 @@ nav {
     .list-container.active {
         transform: translateX(0);
         transition:transform .4s ease-out;
+    }
+
+    .right-navbar {
+        margin: 0;
+    }
+
+    .nav-container {
+        grid-template-areas: 'menu logo account';
+    }
+
+    .logo > a {
+        /*margin: 0;*/
+        margin-inline: auto !important;
     }
 }
 
