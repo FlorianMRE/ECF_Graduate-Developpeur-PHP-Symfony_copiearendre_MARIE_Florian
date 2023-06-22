@@ -8,7 +8,7 @@
 {% endblock %}
 
 {% block javascripts %}
-    {{ encore_entry_script_tags('productJs') }}
+    {{ encore_entry_script_tags('productShowJs') }}
 {% endblock %}
 
 {% block body %}
@@ -48,14 +48,21 @@
                 : ''}}">
                     <div id="user-infos">
                         <span><u><b>{{ comment.user.lastname |upper }} {{ comment.user.firstname }}</b></u></span>
-                        {% if "ROLE_MODERATOR" in comment.user.roles %}
-                            <span class="mini-text">(Modérateur)</span>
-                        {% elseif "ROLE_ADMIN" in comment.user.roles %}
-                            <span class="mini-text">(Propriétaire)</span>
-                        {% endif %}
+                    {% if "ROLE_MODERATOR" in comment.user.roles %}
+                        <span class="mini-text">(Modérateur)</span>
+                    {% elseif "ROLE_ADMIN" in comment.user.roles %}
+                        <span class="mini-text">(Propriétaire)</span>
+                    {% endif %}
                     </div>
                     <p>{{ comment.content |capitalize}}</p>
-                    <span id="publishe-at" class="mini-text">Publié le: {{ comment.publishedAt }}</span>
+                    <span id="publishe-at" class="mini-text">Publié le: {{ comment.publishedAt ? comment.publishedAt|date("m/d/Y H:i") : '' }}</span>
+
+                {% if "ROLE_MODERATOR" in app.user.roles and comment.publishedAt is null%}
+                    <div style="text-align: end; margin: .3em 0">
+                        <a style="background: var(--color-success); text-align: end; padding: .2em .3em; border-radius: 10px" href="{{ path('app_comment_validate', {'id': comment.id}) }}">Valider le commentaire</a>
+                    </div>
+
+                {% endif %}
                 </div>
             {% endif %}
         {% endfor %}
