@@ -62,8 +62,6 @@ class UserController extends AbstractController
 
             $user->setRoles([]);
 
-            dd($user->getRoles());
-
             $plaintextPassword = $user->getPassword();
 
             $hashedPassword = $passwordHasher->hashPassword(
