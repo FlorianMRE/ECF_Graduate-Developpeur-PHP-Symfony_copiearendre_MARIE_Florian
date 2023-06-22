@@ -21,9 +21,10 @@ class ContactMailService
         bool $product = true
     ): void
     {
+
         $email = (new TemplatedEmail())
-            ->from($contactMail->getEmail())
-            ->to('garage.parrot@gmail.com');
+            ->from('test@test.flo-le-codeur.fr')
+            ->to('test@test.flo-le-codeur.fr');
         if ($product) {
             $email->subject('Message pour ' . $contactMail->getProduct()->getTitle())
             ->htmlTemplate('emailTemplate/contactEmail.html.twig');
