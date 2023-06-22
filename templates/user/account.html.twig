@@ -11,7 +11,7 @@
 {% block body %}
     <h1>Mon compte</h1>
 
-        {% if "ROLE_EMPLOYEES" in app.user.roles %}
+        {% if app.user and "ROLE_EMPLOYEES" in app.user.roles %}
             <div id="link-account-create">
                 <a href="{{ path('app_prestation_create') }}">Créer une prestation</a>
             {% if "ROLE_ADMIN" in app.user.roles %}
