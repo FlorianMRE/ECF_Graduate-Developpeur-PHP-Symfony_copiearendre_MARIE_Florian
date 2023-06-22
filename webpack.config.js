@@ -25,6 +25,7 @@ Encore
     .addEntry('_footer', './assets/_Components/_footer.js')
     .addEntry('contactJs', './assets/contact.js')
     .addEntry('productJs', './assets/product.js')
+    .addEntry('productShowJs', './assets/productShow.js')
 
     // ------------------------- ↑ JS ↑ -------------------------
 

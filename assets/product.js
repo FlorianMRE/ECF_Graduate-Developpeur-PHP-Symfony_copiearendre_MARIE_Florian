@@ -55,9 +55,6 @@ inputKilometrages.forEach((item) => {
 
     item.addEventListener('input', () => {
 
-
-        console.log(new URLSearchParams(window.location.search).toString())
-
         const Form = new FormData(formFilter)
 
         Form.forEach((value, key) => {
@@ -166,6 +163,7 @@ params.set('order', paramss)
 url.search = params.toString()
 select = document.querySelector('#order-select');
 
+
 select.addEventListener('change', event => {
 
     let url = new URL(window.location.href)
@@ -175,8 +173,6 @@ select.addEventListener('change', event => {
     url.search = params.toString()
 
     event.preventDefault()
-
-    console.log(window.location.href)
 
     $.ajax({
         url : buyUrl + '?' + ur.toString(),
@@ -198,27 +194,4 @@ filterBtn = document.querySelector('#btn-filter')
 filterBtn.addEventListener('click', (event) => {
     filterBtn.classList.toggle('active')
     $('div.filters').toggleClass('active')
-})
-
-document.querySelectorAll('#form-filter input').forEach(item => {
-
-    item.addEventListener('input', (e) => {
-        if (item.value.length > 4) {
-            return false
-        }
-    })
-})
-
-
-// ---------------------- Product Show ----------------------
-
-imgShow = document.querySelector('.product-img-show')
-carouselImg = document.querySelectorAll('img.product-img-show-carousel')
-
-
-carouselImg.forEach((item) => {
-    item.addEventListener('click', () => {
-        console.log(item.src)
-        imgShow.src = item.src
-    })
 })
