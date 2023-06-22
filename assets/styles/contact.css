@@ -118,12 +118,25 @@ label + input[type=checkbox] {
     justify-content: center;
 }
 
-.client-informations a {
+.client-informations {
+    display: flex;
+    gap: 10px;
+}
+
+.client-informations > div {
+    flex: 1;
+}
+
+.client-informations > #informations-logo {
+    padding: 2em;
+}
+
+#informations a {
     color: var(--color-principal-3);
     font-style: italic;
 }
 
-.client-informations > div{
+#informations > div{
     margin-top: .5em;
 }
 
@@ -159,6 +172,12 @@ label + input[type=checkbox] {
     margin-top: .2em;
     display: flex;
     flex-direction: column;
+}
+
+@media screen and (max-width: 1000px) {
+    .client-informations {
+        flex-direction: column;
+    }
 }
 
 @media screen and (max-width: 900px) {
