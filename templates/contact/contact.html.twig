@@ -60,13 +60,18 @@
         </div>
     </section>
 
-    <div class="client-informations">
-        <div>{{ clientsInformations.entrepriseName }}</div>
-        <div>{{ clientsInformations.description }}</div>
-        <div>{{ clientsInformations.history }}</div>
-        <span>Addresse: {{ clientsInformations.addressNumber }} {{ clientsInformations.addressStreet }} - {{ clientsInformations.addressCity }} {{ clientsInformations.addressZipcode }}</span>
-        <div>N° de téléphone: <a href="tel:{{ clientsInformations.tel }}">{{ clientsInformations.tel }}</a> </div>
-        <div>N° Siret: {{ clientsInformations.siretNumber }}</div>
-    </div>
+    <section class="client-informations">
+        <div id="informations">
+            <div>{{ clientsInformations.entrepriseName }}</div>
+            <div>{{ clientsInformations.description }}</div>
+            <div>{{ clientsInformations.history }}</div>
+            <span>Addresse: {{ clientsInformations.addressNumber }} {{ clientsInformations.addressStreet }} - {{ clientsInformations.addressCity }} {{ clientsInformations.addressZipcode }}</span>
+            <div>N° de téléphone: <a href="tel:{{ clientsInformations.tel }}">{{ clientsInformations.tel }}</a> </div>
+            <div>N° Siret: {{ clientsInformations.siretNumber }}</div>
+        </div>
+        <div id="informations-logo">
+            <img src="{{ asset('assets/logo/Gros-logo.svg') }}" width="100%" height="auto" alt="Logo du garage V.Parrot">
+        </div>
+    </section>
 
 {% endblock %}
