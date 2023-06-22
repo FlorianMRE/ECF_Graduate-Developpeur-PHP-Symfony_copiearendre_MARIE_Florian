@@ -40,13 +40,20 @@
 }
 
 .client-opinion-container {
-    height: 400px;
+    max-height: 400px;
     overflow-y: scroll;
 }
 
 .client-opinion-container > ul {
     display: grid;
     grid-template-columns: 1fr 1fr;
+}
+
+#logo-container {
+    padding: 50px;
+    max-width: 1000px;
+    width: 100%;
+    margin-inline: auto;
 }
 
 @media screen and (max-width: 1000px) {
