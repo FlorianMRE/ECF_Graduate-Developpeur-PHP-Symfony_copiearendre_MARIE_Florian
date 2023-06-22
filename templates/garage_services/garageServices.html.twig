@@ -17,7 +17,7 @@
             <li class="prestation-card {{ count is odd ? 'invert' : '' }}">
                 <h3>{{ prestation.title }}</h3>
                 <p>{{ prestation.description }}</p>
-            {% if "ROLE_EMPLOYEES" in app.user.roles %}
+            {% if app.user and "ROLE_EMPLOYEES" in app.user.roles%}
                 <span>
                     <a href="{{ path('app_prestation_delete', {'id': prestation.id}) }}">supprimer</a>
                 </span>
