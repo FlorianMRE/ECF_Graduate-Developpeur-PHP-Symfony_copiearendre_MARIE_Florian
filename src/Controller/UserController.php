@@ -25,19 +25,10 @@ class UserController extends AbstractController
 
         $error = $authenticationUtils->getLastAuthenticationError();
 
-//        if ($error->getMessage() === "Bad credentials.") {
-//            $error = 'non';
-//        }
-
-        dump($error);
-
-//        $lastusername = $authenticationUtils->getLastUsername();
-
         if ($form->isSubmitted()) {
             return $this->redirectToRoute('app_home');
         }
 
-        dump($error);
         return $this->render('user/login.html.twig', [
             'formView' => $form->createView(),
             'error' => $error
