@@ -21,7 +21,7 @@
         {% endif %}
 
 
-    {% if "ROLE_MODERATOR" in app.user.roles %}
+    {% if app.user and "ROLE_MODERATOR" in app.user.roles %}
         <section class="opinion-moderate">
             <h3 style="text-align: center; margin-top: 1em">Avis à modérés</h3>
             <div class="opinion-moderate-container">
