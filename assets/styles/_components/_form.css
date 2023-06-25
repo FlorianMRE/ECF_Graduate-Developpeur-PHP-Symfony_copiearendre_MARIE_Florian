@@ -92,7 +92,7 @@ h1 {
 }
 
 .alert {
-    color: #f1f1f1;
+    color: var(--color-principal-3);
     letter-spacing: .7px;
     text-align: center;
     margin: 20px 0 0 0;
