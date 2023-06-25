@@ -25,7 +25,7 @@ class UserFixtures extends Fixture
             ->setLastname('Parrot')
             ->setPhoneTel('0606060606')
             ->setPassword('Qwerty!!123')
-            ->setRoles(["ROLE_ADMIN", "ROLE_USER"])
+            ->setRoles(["ROLE_ADMIN", "ROLE_USER", "ROLE_EMPLOYEES"])
         ;
         $plaintextPassword = $admin->getPassword();
 
@@ -48,7 +48,7 @@ class UserFixtures extends Fixture
             ->setLastname('Plart')
             ->setPhoneTel('0707070707')
             ->setPassword('Qwerty!!123')
-            ->setRoles(["ROLE_MODERATOR", "ROLE_USER"])
+            ->setRoles(["ROLE_MODERATOR", "ROLE_USER", "ROLE_EMPLOYEES"])
         ;
         $plaintextPassword = $moderator->getPassword();
 
