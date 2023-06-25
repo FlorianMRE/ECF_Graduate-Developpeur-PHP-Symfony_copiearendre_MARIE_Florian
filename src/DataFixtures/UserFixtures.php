@@ -24,7 +24,7 @@ class UserFixtures extends Fixture
             ->setFirstname('Vincent')
             ->setLastname('Parrot')
             ->setPhoneTel('0606060606')
-            ->setPassword('Azerty!!123')
+            ->setPassword('Qwerty!!123')
             ->setRoles(["ROLE_ADMIN", "ROLE_USER"])
         ;
         $plaintextPassword = $admin->getPassword();
