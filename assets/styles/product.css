@@ -24,6 +24,12 @@
     object-fit: contain;
 }
 
+@media screen and (max-width: 900px) {
+    .product-show-wrapper {
+        flex-direction: column;
+    }
+}
+
 
 /* ---- Img Carousel---- */
 
@@ -48,7 +54,7 @@
 .product-show-wrapper > #product-description > .product-description-wrapper > #infos {
     display: grid;
     grid-auto-rows: 50px;
-    grid-template-columns: 50% 50%;
+    grid-template-columns: repeat(auto-fill, minmax(max-content, 250px));
     width: 100%;
     min-width: max-content;
     gap: 1em;
@@ -72,6 +78,7 @@
     flex: 1;
     overflow-y: scroll;
     padding: 2em;
+    padding-right: 0;
 }
 
 #product-description > h3 {
