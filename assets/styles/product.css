@@ -1,5 +1,5 @@
 .product-show-wrapper {
-    display: flex;
+    display: -webkit-flex;
     width: 100%;
     padding-bottom: 10dvh;
     border-bottom: 1px dashed var(--color-dark);
