@@ -27,6 +27,8 @@
 @media screen and (max-width: 900px) {
     .product-show-wrapper {
         flex-direction: column;
+        -webkit-flex-direction: column;
+        -ms-flex-direction: column;
     }
 }
 
