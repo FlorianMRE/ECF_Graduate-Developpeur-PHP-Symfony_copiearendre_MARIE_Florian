@@ -32,7 +32,7 @@ class OpinionsFixtures extends Fixture
                 'email' => 'test3@gmail.com',
                 'lastname' => 'Patrick',
                 'firstname' => 'Patrick',
-                'comment' => 'Toujours un plaisir de venir dans ce temple de la mécanique, toujours de bon conseil et avec le sourire. Je recommande formtement',
+                'comment' => 'Toujours un plaisir de venir dans ce temple de la mécanique, toujours de bon conseil et avec le sourire. Je recommande fortement',
                 'note' => 10,
                 'published' => true,
             ],
