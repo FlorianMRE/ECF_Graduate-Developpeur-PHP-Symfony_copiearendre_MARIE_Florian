@@ -33,6 +33,7 @@ textarea {
 
 body {
     width: 100dvw;
+    overflow-x: hidden;
 }
 
 input::-webkit-outer-spin-button,
