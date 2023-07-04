@@ -82,7 +82,8 @@ input::-webkit-inner-spin-button {
     position: absolute;
     z-index: -1;
     inset: 0;
-    background-image: linear-gradient(to left, transparent, #e1e1e1 20% 80%, transparent);
+    background: var(--color-grey);
+    opacity: 0.1;
 }
 
 .main-wrapper {
