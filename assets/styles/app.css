@@ -55,13 +55,33 @@ input::-webkit-inner-spin-button {
 }
 
 .body-wrapper {
-    background-color: #e1e1e1;
     height: auto;
     min-height: 100vh;
     max-width: 100dvw;
-
+    position: relative;
     display: grid;
     grid-template-rows: var(--navbar-height) 1fr var(--footer-height);
+}
+
+.body-wrapper::before {
+    content: '';
+    position: absolute;
+    height: 100%;
+    inset: 0;
+    z-index: -2;
+    opacity: 0.1;
+    background-image:  linear-gradient(135deg, #ef7575 25%, transparent 25%), linear-gradient(225deg, #ef7575 25%, transparent 25%), linear-gradient(45deg, #ef7575 25%, transparent 25%), linear-gradient(315deg, #ef7575 25%, #dbdbdb 25%);
+    background-position:  21px 0, 21px 0, 0 0, 0 0;
+    background-size: 42px 42px;
+    background-repeat: repeat;
+}
+
+.body-wrapper::after {
+    content: '';
+    position: absolute;
+    z-index: -1;
+    inset: 0;
+    background-image: linear-gradient(to left, transparent, #e1e1e1 20% 80%, transparent);
 }
 
 .main-wrapper {
@@ -83,6 +103,22 @@ h1 {
     display: flex;
     justify-content: center;
     margin-top: 30px;
+}
+
+label + ul {
+    text-align: center;
+    color: var(--color-principal-3);
+}
+
+.btn-container {
+    text-align: center;
+    margin: 2em 0;
+}
+
+.btn-delete {
+    color: var(--color-light);
+    background: var(--color-principal-3);
+    box-shadow: 0 0 10px var(--color-principal-1);
 }
 
 form > .submit > button[type=submit] {

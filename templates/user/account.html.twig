@@ -11,6 +11,10 @@
 {% block body %}
     <h1>Mon compte</h1>
 
+    <div class="btn-container">
+        <a href="{{ path('app_user_delete', {'id': app.user.id}) }}" class="btn btn-delete">Supprimer mon compte</a>
+    </div>
+
         {% if app.user and "ROLE_EMPLOYEES" in app.user.roles %}
             <div id="link-account-create">
                 <a href="{{ path('app_prestation_create') }}">Créer une prestation</a>

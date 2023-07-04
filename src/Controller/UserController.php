@@ -8,8 +8,11 @@ use App\Form\RegisterType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Bundle\SecurityBundle\Security;
+use Symfony\Component\Finder\Exception\AccessDeniedException;
+use Symfony\Component\HttpFoundation\Exception\BadRequestException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
@@ -82,5 +85,28 @@ class UserController extends AbstractController
     public function logout()
     {
 
+    }
+
+
+    #[Route('/user/{id}/delete', name: 'app_user_delete')]
+    public function delete(
+        User $user,
+        EntityManagerInterface $em,
+    ): Response
+    {
+        if (!$user) {
+            throw new BadRequestException('Aucun compte associé');
+        }
+
+        if ($this->getUser()->getId() !== $user->getId()) {
+            throw new AccessDeniedException('Ceci n\'est pas votre compte');
+        }
+
+        $em->getRepository(User::class)->remove($user, true);
+
+        $session = new Session();
+        $session->invalidate();
+
+        return $this->redirectToRoute('app_register');
     }
 }
