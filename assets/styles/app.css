@@ -133,7 +133,8 @@ form > .submit > button[type=submit] {
     font-weight: bold;
     color: #f1f1f1;
     border: none;
-    background: #181818;
+    background: var(--color-principal-1);
+    box-shadow: 0 0 5px var(--color-principal-3);
     border-radius: 5px;
     cursor: pointer;
 }
