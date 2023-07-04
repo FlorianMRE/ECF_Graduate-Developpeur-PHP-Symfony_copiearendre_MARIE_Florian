@@ -14,6 +14,6 @@ Logiciel de serveur local commme wamp, mamp, xamp, ou alors utiliser docker si v
 4. Créer les données pour nourrir la base de donnée ((symfony ou php/bin) console doctrine:fixture:load)
 5. Démarré le serveur local (symfony serve)
 
-Modification du .htaccess si besoin.
+Création du .htaccess si besoin.
 
 ![](https://media.giphy.com/media/8xgqLTTgWqHWU/giphy.gif)
