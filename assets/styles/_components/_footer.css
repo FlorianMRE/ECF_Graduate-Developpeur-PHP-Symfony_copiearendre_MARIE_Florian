@@ -14,6 +14,26 @@
     color: var(--color-light);
 }
 
+#footer-hours {
+    display: flex;
+    gap: 2rem;
+    text-align: center;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+#footer-hours > li > .hours-footer-container {
+    color: var(--color-principal-1);
+}
+
+#footer-hours > li > .hours-footer-container > span {
+    margin-inline: .2em;
+}
+
+#footer-hours > li > span {
+    font-style: italic;
+}
+
 .footer-container > * {
     padding: .6em 0;
     display: inline-block;

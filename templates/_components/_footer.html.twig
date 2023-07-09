@@ -1,4 +1,21 @@
 <div class="footer-container">
     <span>garage V.Parrot</span>
     <a href="{{ path('app_contact') }}">Infos et contact</a>
+<ul id="footer-hours">
+    {% for hours in openingHours %}
+        <li>
+            <span>{{ hours.weekDay|capitalize }}</span>
+            <div class="hours-footer-container">
+                {% if hours.closeDay != true %}
+                    {% if hours.amOpen %}<span>{{hours.amopen|date("H:i")}}</span>{% endif %}
+                    {% if hours.amClose %}<span>{{hours.amClose|date("H:i")}}</span>{% endif %}
+                    {% if hours.pmOpen %}<span>{{ hours.pmOpen|date("H:i")}}</span>{% endif %}
+                    {% if hours.pmClose %}<span>{{ hours.pmClose|date("H:i") }}</span>{% endif %}
+                {% else %}
+                    <span class="closed-hour">Fermé</span>
+                {% endif %}
+            </div>
+        </li>
+    {% endfor %}
+</ul>
 </div>
