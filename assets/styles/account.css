@@ -1,7 +1,7 @@
 .opinion-moderate-container {
     height: auto;
     max-height: 350px;
-    overflow-y: scroll;
+    overflow-y: auto;
 }
 
 #no-opinions-moderate {
