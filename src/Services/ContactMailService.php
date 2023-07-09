@@ -23,8 +23,8 @@ class ContactMailService
     {
 
         $email = (new TemplatedEmail())
-            ->from('garage-parrot-site@garage-parrot.flo-le-codeur.fr')
-            ->to('garage-parrot-site@garage-parrot.flo-le-codeur.fr');
+            ->from('garage-parrot@garage-parrot.flo-le-codeur.fr')
+            ->to('garage-parrot@garage-parrot.flo-le-codeur.fr');
         if ($product) {
             $email->subject('Message pour ' . $contactMail->getProduct()->getTitle())
             ->htmlTemplate('emailTemplate/contactEmail.html.twig');
