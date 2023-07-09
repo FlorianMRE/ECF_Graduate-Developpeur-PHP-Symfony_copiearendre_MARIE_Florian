@@ -41,7 +41,7 @@
 
 .client-opinion-container {
     max-height: 400px;
-    overflow-y: scroll;
+    overflow-y: auto;
 }
 
 .client-opinion-container > ul {
