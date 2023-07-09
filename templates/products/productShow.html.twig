@@ -70,15 +70,20 @@
     </section>
 
     <section id="form-container">
+        {% if app.user %}
+            <div id="comment">
+                {{ form_label(commentForm.content) }}
+                {{ form_widget(commentForm.content) }}
+                <div id="comment-submit-btn">
+                    <button type="submit">Envoyer</button>
+                </div>
+            </div>
+        {% else %}
+            <h4>Vous devez être connecté pour laisser un commentaire.</h4>
+        {% endif %}
         {{ form_start(commentForm) }}
 
-        <div id="comment">
-            {{ form_label(commentForm.content) }}
-            {{ form_widget(commentForm.content) }}
-            <div id="comment-submit-btn">
-                <button type="submit">Envoyer</button>
-            </div>
-        </div>
+        
 
         {{ form_end(commentForm) }}
     </section>
