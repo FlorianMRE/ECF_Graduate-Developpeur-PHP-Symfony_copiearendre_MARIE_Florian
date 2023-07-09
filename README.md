@@ -17,3 +17,15 @@ Logiciel de serveur local commme wamp, mamp, xamp, ou alors utiliser docker si v
 Création du .htaccess si besoin.
 
 ![](https://media.giphy.com/media/8xgqLTTgWqHWU/giphy.gif)
+
+## Création d'un admin
+
+Pour avoir accès à un admin, il faut ce connecter avec les informations suivantes:
+
+- Username: V.Parrot@gmail.com
+- Password: Qwerty!!123
+
+Pour avoir accès à un modérateur, il faut ce connecter avec les informations suivantes:
+
+- Username: Stephanie.plart@gmail.com
+- Password: Qwerty!!123
