@@ -71,6 +71,8 @@
 
     <section id="form-container">
         {% if app.user %}
+            {{ form_start(commentForm) }}
+
             <div id="comment">
                 {{ form_label(commentForm.content) }}
                 {{ form_widget(commentForm.content) }}
@@ -78,14 +80,12 @@
                     <button type="submit">Envoyer</button>
                 </div>
             </div>
+
+            {{ form_end(commentForm) }}
         {% else %}
-            <h4>Vous devez être connecté pour laisser un commentaire.</h4>
+            <h4 style="text-align: center; color: var(--color-principal-1)">Vous devez être connecté pour laisser un commentaire.</h4>
         {% endif %}
-        {{ form_start(commentForm) }}
 
-        
-
-        {{ form_end(commentForm) }}
     </section>
 
     <section id="form-contactMail">
