@@ -73,7 +73,7 @@ class RegisterType extends AbstractType
                 'type' => PasswordType::class,
                 'required' => true,
                 'invalid_message' => 'Les mots de passe doivent être identiques',
-                'first_options'  => ['label' => 'Password', 'attr' => ['placeholder' => 'Entrez votre mot de passe']],
+                'first_options'  => ['label' => 'Mot de passe', 'attr' => ['placeholder' => 'Entrez votre mot de passe']],
                 'second_options' => ['label' => 'Vérification du mot de passe', 'attr' => ['placeholder' => 'Entrez de nouveau votre mot de passe']],
             ])
         ;
