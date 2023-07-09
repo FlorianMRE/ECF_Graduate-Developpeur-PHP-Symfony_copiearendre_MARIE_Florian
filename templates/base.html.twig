@@ -27,7 +27,7 @@
             </div>
         </main>
         <footer>
-            {% include './_components/_footer.html.twig' %}
+            {{ render(controller('App\\Controller\\FooterController::index')) }}
         </footer>
     </div>
 
