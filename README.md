@@ -12,7 +12,9 @@ Logiciel de serveur local commme wamp, mamp, xamp, ou alors utiliser docker si v
 2. Installer les dépendances (composer install)
 3. Créer la base de données ((symfony ou php/bin) console doctrine:database:create )
 4. Créer les données pour nourrir la base de donnée ((symfony ou php/bin) console doctrine:fixture:load)
-5. Démarré le serveur local (symfony serve)
+5. Créer et activer les fichiers Css/Js (npm install)
+6. Compiler les fichiers Css/Js (yarn watch)
+7. Démarré le serveur local (symfony serve)
 
 Création du .htaccess si besoin.
 
