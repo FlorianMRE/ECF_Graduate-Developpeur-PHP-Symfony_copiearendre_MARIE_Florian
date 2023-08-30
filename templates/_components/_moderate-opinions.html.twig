@@ -12,6 +12,7 @@
                    <span>{{ opinion.createdAt|date("m/d/Y H:i") }}</span>
                    <div style="text-align: end">
                        <a href="{{ path('app_opinion_validate', {'id': opinion.id}) }}">Valider l'avis</a>
+                       <a style="background: var(--color-principal-2);" href="{{ path('app_opinion_delete', {'id': opinion.id}) }}">Supprimer l'avis</a>
                    </div>
                {% else %}
                    <span>{{ opinion.publishedAt|date("m/d/Y H:i") }}</span>
