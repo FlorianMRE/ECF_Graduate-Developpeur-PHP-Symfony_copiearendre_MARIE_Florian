@@ -2,8 +2,7 @@
 
 namespace App\Controller;
 
-use App\Entity\Comments;
-use App\Repository\CommentsRepository;
+use App\Entity\Products;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -15,7 +14,7 @@ class ModeratorController extends AbstractController
     public function index(EntityManagerInterface $em): Response
     {
 
-        $products = $em->getRepository(Comments::class)->getProductWithNoPublishedComment();
+        $products = $em->getRepository(Products::class)->getProductWithNoPublishedComment();
 
         return $this->render('moderator/moderator.html.twig', [
             'controller_name' => 'ModeratorController',

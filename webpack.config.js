@@ -40,6 +40,7 @@ Encore
     .addEntry('homeCss', './assets/styles/home.css')
     .addEntry('accountCss', './assets/styles/account.css')
     .addEntry('prestationCss', './assets/styles/prestation.css')
+    .addEntry('moderatorCss', './assets/styles/moderator.css')
 
     .enableSingleRuntimeChunk()
 
