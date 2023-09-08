@@ -18,6 +18,9 @@
         {% if app.user and "ROLE_EMPLOYEES" in app.user.roles %}
             <div id="link-account-create">
                 <a href="{{ path('app_prestation_create') }}">Créer une prestation</a>
+            {% if "ROLE_MODERATOR" in app.user.roles %}
+                <a href="{{ path('app_moderator') }}">Modérer les commentaires</a>
+            {% endif %}
             {% if "ROLE_ADMIN" in app.user.roles %}
                 <a href="{{ path('app_admin_user_create') }}">Créer un employé</a>
             {% endif %}
