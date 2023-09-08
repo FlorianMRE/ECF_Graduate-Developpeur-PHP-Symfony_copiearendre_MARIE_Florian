@@ -21,16 +21,12 @@ class UserController extends AbstractController
 {
     #[Route('/login', name: 'app_login')]
     public function login(
-        AuthenticationUtils $authenticationUtils
+        AuthenticationUtils $authenticationUtils,
     ): Response
     {
         $form = $this->createForm(LoginType::class);
 
         $error = $authenticationUtils->getLastAuthenticationError();
-
-        if ($form->isSubmitted()) {
-            return $this->redirectToRoute('app_home');
-        }
 
         return $this->render('user/login.html.twig', [
             'formView' => $form->createView(),
