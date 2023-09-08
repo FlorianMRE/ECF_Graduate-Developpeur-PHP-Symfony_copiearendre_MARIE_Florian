@@ -101,15 +101,19 @@ class ProductsController extends AbstractController
                 }
 
             } else {
-                throw new BadRequestException('Pas d\'image sélectionnées');
+                $this->addFlash('error', 'Pas le bon format d\'image');
             }
 
             $this->em->persist($product);
             $this->em->flush();
 
+            $this->addFlash('success', 'Produit créer avec succès');
+
             return $this->redirectToRoute('app_home', [
                 'slug' => $product->getSlug()
             ]);
+        } elseif ($form->isSubmitted() && !$form->isValid()) {
+            $this->addFlash('error', 'Un problème est survenue...');
         }
 
         return $this->render('products/product_create_edit.html.twig', [
@@ -138,6 +142,8 @@ class ProductsController extends AbstractController
         if ($user) {
             if ($commentForm->isSubmitted() && $commentForm->isSubmitted()) {
                 $commentService->commentFormSubmit($comment, $user, $product);
+                $this->addFlash('success', 'Votre commentaire à était envoyé');
+                $this->addFlash('warning', 'Votre commentaire doit être vérifier avant d\'apparaître');
                 return $this->redirect($request->getUri());
             }
         }
@@ -156,10 +162,15 @@ class ProductsController extends AbstractController
 
             $contactMailService->sendEmail($contactMail);
 
+            $this->addFlash('success', 'Votre mail à bien était envoyé');
+            $this->addFlash('warning', 'Votre mail doit être vérifier avant d\'apparaître');
+
             unset($contactMail);
             unset($contactMailForm);
             $contactMail = new ContactMail();
             $contactMailForm = $this->createForm(ContactMailType::class, $contactMail);
+        } elseif ($contactMailForm->isSubmitted() && !$contactMailForm->isValid()) {
+            $this->addFlash('error', 'Un problème est survenue...');
         }
 
         return $this->render('products/productShow.html.twig', [

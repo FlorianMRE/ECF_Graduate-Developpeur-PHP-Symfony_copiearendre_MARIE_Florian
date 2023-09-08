@@ -120,3 +120,85 @@ form > .submit > button[type=submit] {
     border-radius: 5px;
     cursor: pointer;
 }
+
+
+.close-flash {
+    position: relative;
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+}
+
+.close-flash > * {
+    position: absolute;
+    display: block;
+    background: var(--color-light);
+    height: 2px;
+    width: 20px;
+    top: 50%;
+    left: 50%;
+}
+
+.close-flash > span:nth-last-child(1) {
+    transform: translate(-50%, -50%) rotate(-45deg);
+}
+
+.close-flash > span:nth-child(1) {
+    transform: translate(-50%, -50%) rotate(45deg);
+}
+
+.flash-container {
+    position: fixed;
+    bottom: calc(0px + 10vh);
+    right: calc(0px + 2vw);
+}
+
+.flash-box {
+    margin-top: 15px;
+    display: flex;
+    gap: 10px;
+    padding: 1.2em 1.5em;
+    border-radius: 10px;
+    animation: 0.4s linear flashApparition;
+}
+
+.flash-text {
+    color: var(--color-light);
+    font-weight: bold;
+    letter-spacing: 1.5px;
+    font-size: 1.15rem;
+    text-transform: capitalize;
+    width: 30vw;
+    max-height: 300px;
+    overflow-x: hidden;
+}
+
+.success {
+    background: rgb(68, 176, 53);
+}
+
+.error {
+    background: var(--color-principal-3);
+}
+
+.warning {
+    background: #FF7200;
+}
+
+.close {
+    transition: 0.5s ease-out;
+    transform: translateX(20px);
+    opacity: 0;
+}
+
+@keyframes flashApparition {
+    0% {
+        opacity: 0;
+        transform: translateX(20px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateX(0px);
+    }
+}

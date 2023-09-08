@@ -68,7 +68,12 @@ class UserController extends AbstractController
 
             $security->login($user);
 
+            $this->addFlash('success', 'Compte créer avec succès');
+
+
             return $this->redirectToRoute('app_home');
+        } elseif ($form->isSubmitted() && !$form->isValid()) {
+            $this->addFlash('error', 'Un problème est survenue...');
         }
 
         return $this->render('user/register.html.twig', [
@@ -80,7 +85,7 @@ class UserController extends AbstractController
     #[Route('/logout', name: 'app_logout')]
     public function logout()
     {
-
+        $this->addFlash('warning', 'Vous avez était déconnecté');
     }
 
 
@@ -102,6 +107,8 @@ class UserController extends AbstractController
 
         $session = new Session();
         $session->invalidate();
+
+        $this->addFlash('success', 'Compte supprimer');
 
         return $this->redirectToRoute('app_register');
     }

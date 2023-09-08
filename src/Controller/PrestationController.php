@@ -35,7 +35,11 @@ class PrestationController extends AbstractController
             $this->em->persist($prestation);
             $this->em->flush();
 
+            $this->addFlash('success', 'Prestation créer avec succès');
+
             return $this->redirectToRoute('app_services');
+        } elseif ($form->isSubmitted() && !$form->isValid()) {
+            $this->addFlash('error', 'Un problème est survenue...');
         }
 
         return $this->render('prestation/prestation_create.html.twig', [
@@ -50,6 +54,7 @@ class PrestationController extends AbstractController
     {
         $this->em->getRepository(Prestations::class)->remove($prestation, true);
 
+        $this->addFlash('success', 'Prestation supprimer');
 
         return $this->redirectToRoute('app_services');
     }

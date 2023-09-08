@@ -22,6 +22,8 @@ class CommentController extends AbstractController
         $em->persist($comment);
         $em->flush();
 
+        $this->addFlash('success', 'Commentaire validé');
+
         return $this->redirectToRoute('app_product_buy_show', ['slug' => $comment->getProduct()->getSlug()]);
     }
 

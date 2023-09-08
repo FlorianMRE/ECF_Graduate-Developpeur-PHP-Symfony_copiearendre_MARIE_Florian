@@ -37,10 +37,14 @@ class ContactController extends AbstractController
 
             $contactMailService->sendEmail($contactMail, false);
 
+            $this->addFlash('success', 'Votre mail à bien était envoyé');
+
             unset($contactMail);
             unset($contactMailForm);
             $contactMail = new ContactMail();
             $contactMailForm = $this->createForm(ContactMailType::class, $contactMail);
+        } elseif ($contactMailForm->isSubmitted() && !$contactMailForm->isValid()) {
+            $this->addFlash('error', 'Un problème est survenue...');
         }
 
         $openingHours = $em->getRepository(OpeningHours::class)->findAll();

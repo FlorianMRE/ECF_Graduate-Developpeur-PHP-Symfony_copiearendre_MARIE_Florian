@@ -32,12 +32,15 @@ class HomeController extends AbstractController
             $em->persist($opinion);
             $em->flush();
 
+            $this->addFlash('success', 'Votre avis à bien était envoyé');
+            $this->addFlash('warning', 'Votre avis doit être vérifier avant d\'apparaître');
+
             unset($opinion);
             unset($form);
-            $opinion = new Opinion();
-            $form = $this->createForm(OpinionType::class, $opinion);
 
-            $this->redirectToRoute('app_home');
+            return $this->redirect($request->getUri());
+        } elseif ($form->isSubmitted() && !$form->isValid()) {
+            $this->addFlash('error', 'Un problème est survenue...');
         }
 
         $opinions = $em->getRepository(Opinion::class)->getOpinionsPublished();

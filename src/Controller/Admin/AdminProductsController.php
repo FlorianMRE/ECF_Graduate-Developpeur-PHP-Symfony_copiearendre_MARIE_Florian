@@ -20,11 +20,8 @@ class AdminProductsController extends AbstractController
 {
     public function __construct(
         private EntityManagerInterface $em,
-        private ImageService $imageService
     )
     {
-//        $this->em = $em;
-//        $this->imageService = $imageService;
     }
 
     /**
@@ -37,6 +34,8 @@ class AdminProductsController extends AbstractController
     ) : Response
     {
         $this->em->getRepository(Products::class)->remove($products, true);
+
+        $this->addFlash('success', 'Produit supprimer avec succès');
 
         return $this->redirectToRoute('app_home');
     }

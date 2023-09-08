@@ -23,6 +23,17 @@
         </header>
         <main class="main-wrapper">
             <div class="main-container">
+                <div class="flash-container">
+                    {% for message in app.flashes('error') %}
+                        {% include "_components/_flash-card.twig" with {type: 'error', message: message} %}
+                    {% endfor %}
+                    {% for message in app.flashes('warning') %}
+                        {% include "_components/_flash-card.twig" with {type: 'warning', message: message} %}
+                    {% endfor %}
+                    {% for message in app.flashes('success') %}
+                        {% include "_components/_flash-card.twig" with {type: 'success', message: message} %}
+                    {% endfor %}
+                </div>
                 {% block body %}{% endblock %}
             </div>
         </main>

@@ -49,7 +49,16 @@ class AdminUserController extends AbstractController
             $em->persist($user);
             $em->flush();
 
+            if (in_array("ROLE_MODERATOR", $user->getRoles())) {
+            $this->addFlash('success',  'Modérateur créer avec succès');
+            } else {
+                $this->addFlash('success',  'Employé créer avec succès');
+            }
+
+
             return $this->redirectToRoute('app_account');
+        } elseif ($form->isSubmitted() && !$form->isValid()) {
+            $this->addFlash('error', 'Un problème est survenue...');
         }
 
         return $this->render('admin/user/adminUsers.html.twig', [

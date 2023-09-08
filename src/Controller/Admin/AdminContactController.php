@@ -48,10 +48,14 @@ class AdminContactController extends AbstractController
             $em->persist($openingHour);
             $em->flush();
 
+            $this->addFlash('success', 'Les horaires pour' . $openingHour->getWeekDay() . 'on bien était modifiées');
+
             return $this->redirectToRoute('app_contact', [
                 'openingHours' => $openingHours,
                 'clientsInformations' => $clientInformations,
             ]);
+        } elseif ($form->isSubmitted() && !$form->isValid()) {
+            $this->addFlash('error', 'Un problème est survenue...');
         }
 
         return $this->render('admin/contact/adminContact.html.twig', [

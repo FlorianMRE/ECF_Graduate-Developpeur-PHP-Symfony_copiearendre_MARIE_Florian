@@ -30,3 +30,35 @@ hamburgerMenu.addEventListener('click',  () => {
     }
 
 })
+let flash = document.querySelectorAll('.flash-box ');
+
+
+while (flash.length > 3) {
+    closeFlash(flash[0])
+    flash = document.querySelectorAll('.flash-box:not(.close)');
+}
+
+flash.forEach(item => {
+
+    item.children[1].addEventListener('click', () => {
+       closeFlash(item)
+        flash = document.querySelectorAll('.flash-box:not(.close)');
+        console.log(flash)
+    })
+
+    setTimeout(() => {
+        if (item) {
+            closeFlash(item)
+        }
+    }, 4000)
+
+
+    console.log(item.children[1])
+})
+
+function closeFlash(item) {
+    item.classList.add('close')
+    setTimeout(() => {
+        item.remove()
+    }, 500)
+}
