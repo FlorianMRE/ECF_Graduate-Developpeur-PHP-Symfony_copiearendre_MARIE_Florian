@@ -94,7 +94,17 @@ class ProductsRepository extends ServiceEntityRepository
             }
         }
 
+        return $q->getQuery()->getResult();
+    }
 
+    public function getProductWithNoPublishedComment()
+    {
+        $q = $this->createQueryBuilder('p');
+        $q->innerJoin('p.comments', 'c')
+        ->andWhere(
+            $q->expr()->isNull('c.published_at')
+        );
+        $q->groupBy('p.id');
 
         return $q->getQuery()->getResult();
     }
