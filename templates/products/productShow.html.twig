@@ -61,6 +61,7 @@
                 {% if "ROLE_MODERATOR" in app.user.roles and comment.publishedAt is null%}
                     <div style="text-align: end; margin: .3em 0">
                         <a style="background: var(--color-success); text-align: end; padding: .2em .3em; border-radius: 10px" href="{{ path('app_comment_validate', {'id': comment.id}) }}">Valider le commentaire</a>
+                        <a style="background: var(--color-principal-2); text-align: end; padding: .2em .3em; border-radius: 10px" href="{{ path('app_comment_delete', {'id': comment.id}) }}">Supprimer le commentaire</a>
                     </div>
 
                 {% endif %}
