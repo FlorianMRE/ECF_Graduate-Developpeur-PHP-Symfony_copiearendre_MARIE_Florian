@@ -21,10 +21,15 @@ nav {
 }
 
 .logo {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     grid-area: logo;
 }
 
 .logo > #logo-link {
+    height: 35px;
     grid-area: 1/2;
     margin-right: 2em;
     max-width: 9rem;
